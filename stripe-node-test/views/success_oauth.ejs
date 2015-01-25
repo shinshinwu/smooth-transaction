@@ -1,0 +1,67 @@
+<h2>Thank you for authenticate your account!</h3>
+
+<h3>Your Secret Key: <%- user.access_token %></h3>
+<h3>Your Publishable Key: <%- user.stripe_publishable_key %></h3>
+
+<h3>Now copy and paste the below code to your website where you would like the donation widget to appear and start collecting donations!</h3>
+
+<h4>some iframe code snippet</h4>
+
+<h5>Test form for customer making donation to your organization</h5>
+
+<form action="" method="POST" id="payment-form">
+  <span class="payment-errors"></span>
+
+  <div class="form-row">
+    <label>
+      <span>Organization ID</span>
+      <input type="text" size="20" name= "stripe_user_id" value=<%- user.stripe_user_id %> />
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Donation Amount</span>
+      <input type="radio" name="amount" value="5" />
+      <lable>$5</lable>
+      <input type="radio" name="amount" value="10" />
+      <lable>$10</lable>
+      <input type="radio" name="amount" value="20" checked/>
+      <lable>$20</lable>
+      <input type="radio" name="amount" value="50" />
+      <lable>$50</lable>
+      <input type="radio" name="amount" value="100" />
+      <lable>$100</lable>
+      <input type="radio" name="amount" value="100" />
+      <label>
+        <span>Other</span>
+        <input type="number" size="20" name="amount"/>
+      </label>
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Card Number</span>
+      <input type="text" size="20" data-stripe="number"/>
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>CVC</span>
+      <input type="text" size="4" data-stripe="cvc"/>
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Expiration (MM/YYYY)</span>
+      <input type="text" size="2" data-stripe="exp-month"/>
+    </label>
+    <span> / </span>
+    <input type="text" size="4" data-stripe="exp-year"/>
+  </div>
+
+  <button type="submit">Submit Donation</button>
+</form>
