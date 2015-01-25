@@ -11,24 +11,40 @@ router.get('/loggedin', function(req, res) {
 });
 
 router.get('/users', function(req, res) {
+  var email = req.param('email');
+  var password = req.param('password');
+
+  User.findOne({ 'email': email }, function(err, user) {
+    if (err) {
+
+    }
+  });
+
   res.render('loggedin')
 });
 
 router.post('/users', function(req, res) {
-  var email = req.param('email')
-  var password = req.param('password')
+  var email = req.param('email');
+  var password = req.param('password');
+  var passwordVerify = req.param('passwordVerify');
 
-  User.create({
-    email: email,
-    password: password
-  }, function(err, user) {
-    if (err) {
-      res.render('index', {error: err})
-    }
-    else {
-      res.render('loggedin', {user: user})
-    }
-  });
+  if (password === passwordVerify) {
+    User.create({
+      email: email,
+      password: password
+    }, function(err, user) {
+      if (err) {
+        res.render('index', {error: err})
+      }
+      else {
+        res.render('loggedin', {user: user})
+      }
+    });
+  }
+  else {
+    res.render('index', {error: 'Passwords do not match!'})
+  }
+
 
 });
 
