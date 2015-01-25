@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* Route to handle all angular requests */
-router.get('*', function(req, res) {
+router.get('/', function(req, res) {
   res.render('index');
+});
+
+router.get('/users', function(req, res) {
+  console.log(req.param)
 });
 
 module.exports = router;
