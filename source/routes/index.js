@@ -17,11 +17,16 @@ router.get('/users', function(req, res) {
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
-      res.render('index', {error: err})
+      res.redirect('/?err=' + err)
+    }
+    else if (user.password === password) {
+      res.render('loggedin', {user: user})
+    }
+    else {
+      err = 'Invalid email and password!'
+      res.redirect('/?err=' + err)
     }
   });
-
-  res.render('loggedin')
 });
 
 router.post('/users', function(req, res) {
@@ -46,8 +51,6 @@ router.post('/users', function(req, res) {
     err = "Passwords do not match!"
     res.redirect('/?err=' + err)
   }
-
-
 });
 
 module.exports = router;
