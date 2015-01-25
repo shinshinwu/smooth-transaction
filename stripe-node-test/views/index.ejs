@@ -26,6 +26,20 @@
 
   <div class="form-row">
     <label>
+      <span>Full Name</span>
+      <input type="text" size="20" name="name" placeholder="John Snow" />
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Email where your receipt will be send</span>
+      <input type="text" size="20" name="email" placeholder="johnsnow@mail.com" />
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
       <span>Card Number</span>
       <input type="text" size="20" data-stripe="number"/>
     </label>
@@ -45,6 +59,13 @@
     </label>
     <span> / </span>
     <input type="text" size="4" data-stripe="exp-year"/>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>5 Digits Zip Code</span>
+      <input type="text" size="4" name="zip" placeholder="12345" />
+    </label>
   </div>
 
   <button type="submit">Submit Donation</button>
@@ -71,6 +92,8 @@
       $form.append($('<input type="hidden" name="publishableKey" />').val(publishableKey));
       // and submit
       $form.get(0).submit();
+
+      console.log(response)
     }
   };
 
