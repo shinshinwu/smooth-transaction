@@ -2,9 +2,50 @@ var express = require('express');
 var router = express.Router();
 var User = require('../app/models/user')
 
+// GET homepage
 router.get('/', function(req, res) {
   var err = req.param('err')
-  res.render('index', {error: err});
+  var userId = req.session.user_id
+
+  if (userId) {
+    // if logged in, render dashboard page
+    getUser(userId,
+      // if error....
+      function(err) {
+        res.redirect('/?err=' + err);
+    },
+      // if successful
+      function(user) {
+        res.render('dashboard', {user: user})
+    });
+  }
+  else {
+    // if not logged in render signin page with any errors
+    res.render('index', {error: err});
+  }
+});
+
+// GET signup page
+router.get('/signup', function(req, res) {
+  var userId = req.session.user_id
+  var err = req.param('err')
+
+  if (userId) {
+    // if logged in, render dashboard page
+    getUser(userId,
+      // if error....
+      function(err) {
+        res.redirect('/?err=' + err);
+    },
+      // if successful
+      function(user) {
+        res.render('dashboard', {user: user})
+    });
+  }
+  else {
+    // if not logged in render signup page with any errors
+    res.render('signup', {error: err});
+  }
 });
 
 router.get('/loggedin', function(req, res) {
@@ -13,7 +54,7 @@ router.get('/loggedin', function(req, res) {
       res.redirect('/?err=' + err)
     }
     else {
-      res.render('loggedin', {user: user})
+      res.render('dashboard', {user: user})
     }
   });
 });
@@ -32,7 +73,7 @@ router.get('/users', function(req, res) {
       res.redirect('/?err=' + err)
     }
     else if (user.password === password) {
-      res.render('loggedin', {user: user})
+      res.render('dashboard', {user: user})
     }
     else {
       err = 'Invalid email and password!'
@@ -56,7 +97,7 @@ router.post('/users', function(req, res) {
       }
       else {
         req.session.user_id = user._id
-        res.redirect('/loggedin')
+        res.redirect('/')
       }
     });
   }
@@ -65,5 +106,19 @@ router.post('/users', function(req, res) {
     res.redirect('/?err=' + err)
   }
 });
+
+
+function getUser(userId, errorCallback, successCallback) {
+  User.findOne({'_id': userId}, function(err, user) {
+    if (err) {
+      errorCallback(err);
+    }
+    else {
+      successCallback(user);
+    }
+  });
+}
+
+
 
 module.exports = router;

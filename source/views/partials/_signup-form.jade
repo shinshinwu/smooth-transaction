@@ -1,0 +1,9 @@
+form#signup-form(action="/users" method="POST")
+  div.input-row
+    input(autocomplete="off" placeholder="Enter your email" name="email")
+  div.input-row
+    input(autocomplete="off" placeholder="Enter your password" name="password" type="password")
+  div.input-row
+    input(autocomplete="off" placeholder="Verify your password" name="passwordVerify" type="password")
+  div.input-row
+    input(type="submit" value="Sign Up")
