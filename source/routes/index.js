@@ -8,7 +8,19 @@ router.get('/', function(req, res) {
 });
 
 router.get('/loggedin', function(req, res) {
-  res.render('loggedin')
+  User.findOne({'_id': req.session.user_id}, function(err, user) {
+    if (err) {
+      res.redirect('/?err=' + err)
+    }
+    else {
+      res.render('loggedin', {user: user})
+    }
+  });
+});
+
+router.get('/logout', function(req, res) {
+  req.session.user_id = ''
+  res.redirect('/')
 });
 
 router.get('/users', function(req, res) {
@@ -43,7 +55,8 @@ router.post('/users', function(req, res) {
         res.redirect('/?err=' + err)
       }
       else {
-        res.render('loggedin', {user: user})
+        req.session.user_id = user._id
+        res.redirect('/loggedin')
       }
     });
   }
