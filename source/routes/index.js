@@ -3,7 +3,8 @@ var router = express.Router();
 var User = require('../app/models/user')
 
 router.get('/', function(req, res) {
-  res.render('index');
+  var err = req.param('err')
+  res.render('index', {error: err});
 });
 
 router.get('/loggedin', function(req, res) {
@@ -16,7 +17,7 @@ router.get('/users', function(req, res) {
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
-
+      res.render('index', {error: err})
     }
   });
 
@@ -34,7 +35,7 @@ router.post('/users', function(req, res) {
       password: password
     }, function(err, user) {
       if (err) {
-        res.render('index', {error: err})
+        res.redirect('/?err=' + err)
       }
       else {
         res.render('loggedin', {user: user})
@@ -42,7 +43,8 @@ router.post('/users', function(req, res) {
     });
   }
   else {
-    res.render('index', {error: 'Passwords do not match!'})
+    err = "Passwords do not match!"
+    res.redirect('/?err=' + err)
   }
 
 
