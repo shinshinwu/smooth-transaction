@@ -7,6 +7,7 @@
     "stop": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.10.1",
     "cookie-parser": "~1.3.3",
     "debug": "~2.1.1",
@@ -14,7 +15,6 @@
     "ejs": "^2.2.3",
     "express": "~4.10.6",
     "express-session": "^1.10.1",
-    "jade": "~1.8.2",
     "mongoose": "3.8.21",
     "mongoose-unique-validator": "^0.4.1",
     "morgan": "~1.5.1",
