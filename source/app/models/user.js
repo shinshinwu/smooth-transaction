@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs')
 var uniqueValidator = require('mongoose-unique-validator');
 
 var userSchema = new mongoose.Schema({
@@ -48,5 +49,33 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.plugin(uniqueValidator);
+
+userSchema.pre('save', function(next) {
+  var user = this;
+
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) return next();
+
+  bcrypt.hash(user.password, null, null, function(err, hash) {
+    if (err) {
+      return next(err);
+    }
+    else {
+      user.password = hash;
+      next();
+    }
+  });
+});
+
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, function(err, res) {
+    if (err) {
+      return callback(err);
+    }
+    else {
+      callback(null, res);
+    }
+  });
+}
 
 module.exports = mongoose.model('User', userSchema);
