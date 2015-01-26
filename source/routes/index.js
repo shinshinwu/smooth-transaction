@@ -208,9 +208,55 @@ router.get('/iframe', function(req, res) {
   res.render('iframe')
 });
 
+router.post('/iframe', function(req, res) {
+
+  var publishableKey = req.body.publishableKey;
+  var stripeToken = req.body.stripeToken;
+  var chargeAmount = parseInt(req.body.amount);
+  var name = req.body.name;
+  var email = req.body.email;
+  var zip = req.body.zip;
+
+  // console.log(chargeAmount);
+
+  User.findOne({ 'stripe_publishable_key': publishableKey }, function (err, user) {
+      if (err) return handleError(err);
+      var stripe = require("stripe")(user.access_token);
+
+
+      var charge = stripe.charges.create({
+        amount: chargeAmount*100, // amount in cents, again
+        currency: "usd",
+        card: stripeToken,
+        metadata: {'email': email, 'zip_code': zip, "name": name}
+      }, function(err, charge) {
+        if (err && err.type === 'StripeCardError') {
+          res.render('error')
+        } else {
+
+          // need to figure out how to update entry on mongoose and change
+
+          // User.findOneAndUpdate(conditions, update, options, function(err, thing){
+          //   console.log(thing)
+          // })
+          // User.update({"stripe_user_id": user.stripe_user_id }, { "donation": 10 }, {upsert: true}, function(err){ console.log (err)});
+          console.log(user.stripe_user_id)
+
+
+
+          res.render('congrats', { charge: chargeAmount });
+        }
+
+      });
+
+  });
+    // render congrats page
+});
+
 router.get('/sampleorg', function(req, res) {
   res.render('sampleOrg')
 });
+
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
