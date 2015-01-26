@@ -45,10 +45,45 @@ var phoneValidator = [
   validate({
     validator: 'matches',
     arguments: /[(]?\d{3}([-]|[)])?\d{3}[-]?\d{4}\d*/,
-    message: 'Please enter at least a ten digit phone number'
+    message: 'Phone number must be at least 10 digits'
   })
 ]
 
+var dayValidator = [
+  validate({
+    validator: 'matches',
+    arguments: /[0-3]{1}\d{1}/,
+    message: 'Enter a valid 2 digit day (ex: 01)'
+  }),
+  validate({
+    validator: 'isNumeric',
+    message: 'Day must be numeric'
+  })
+]
+
+var monthValidator = [
+  validate({
+    validator: 'matches',
+    arguments: /[0-1]{1}\d{1}/,
+    message: 'Enter a valid 2 digit month (ex: 01)'
+  }),
+  validate({
+    validator: 'isNumeric',
+    message: 'Month must be numeric'
+  })
+]
+
+var yearValidator = [
+  validate({
+    validator: 'isNumeric',
+    message: 'Year must be numeric'
+  }),
+  validate({
+    validator: 'isLength',
+    arguments: [4,4],
+    message: 'Year must be 4 digits'
+  })
+]
 
 
 
@@ -75,9 +110,9 @@ var userSchema = new mongoose.Schema({
                             firstName: {type: String /*required: true*/},
                             lastName: {type: String /*required: true*/},
                             DOB: {
-                              day: {type: String /*required: true*/},
-                              month: {type: String /*required: true*/},
-                              year: {type: String /*required: true*/}
+                              day: {type: String, validate: dayValidator /*required: true*/},
+                              month: {type: String, validate: monthValidator /*required: true*/},
+                              year: {type: String, validate: yearValidator /*required: true*/}
                             },
                             SSN: {type: String /*required: true*/}
                           },
