@@ -123,10 +123,14 @@ router.post('/users', function(req, res) {
   var password = req.param('password');
   var passwordVerify = req.param('passwordVerify');
 
-  if (password === passwordVerify) {
+  if (password.length < 8) {
+    err = "Password must be at least 8 characters"
+    res.redirect('/signup?err=' + err)
+  }
+  else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
       if (err) {
-        res.redirect('/?err=' + err)
+        res.redirect('/signup?err=' + err)
       }
       else {
         req.session.user_id = user._id
@@ -136,7 +140,7 @@ router.post('/users', function(req, res) {
   }
   else {
     err = "Passwords do not match!"
-    res.redirect('/?err=' + err)
+    res.redirect('/signup?err=' + err)
   }
 });
 
