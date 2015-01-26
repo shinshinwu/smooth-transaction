@@ -53,7 +53,7 @@ router.get('/logout', function(req, res) {
   res.redirect('/')
 });
 
-router.get('/dashboard', function(req, res) {
+router.post('/dashboard', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
   var userId = req.session.user_id
