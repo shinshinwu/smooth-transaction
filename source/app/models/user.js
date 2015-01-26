@@ -26,7 +26,7 @@ var userSchema = new mongoose.Schema({
                               month: {type: String, default: ''},
                               year: {type: String, default: ''}
                             },
-                            last4SSN: {type: String, default: ''}
+                            SSN: {type: String, default: ''}
                           },
 
   phone                 : {type: String, default: ''},
