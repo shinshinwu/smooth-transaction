@@ -148,8 +148,27 @@ router.get('/users/authorize', function(req, res){
   }));
 });
 
+// router.get('/users/:user_id',function(req, res){
+//   User.findById(req.params.user_id, function(err, user){
+//     if (err){
+//       res.send(err)
+//     } else {
+//       user.access_token = "I changed"
+//       user.save(function(err){
+//         if (err){
+//           res.send(err)
+//         } else {
+//           res.json({message: "User updated!"})
+//         };
+//       });
+//     }
+//   });
+// });
+
 router.get('/users/oath/callback', function(req, res){
+
   var userId = req.session.user_id
+  console.log(userId)
   var code = req.query.code;
 
   request.post({
@@ -170,37 +189,23 @@ router.get('/users/oath/callback', function(req, res){
     var refreshToken = JSON.parse(body).refresh_token;
     var accessToken = JSON.parse(body).access_token;
 
-    getUser(userId,
-      // if error....
-      function(err) {
-        console.log(err);
-    },
-      // if successful
-      function(user) {
-        console.log(user)
-    });
-
-    //need write to existing user and not create new user!!
-    // User.create({
-    //   stripe_user_id: stripeUserId,
-    //   stripe_publishable_key: stripePublishableKey,
-    //   refresh_token: refreshToken,
-    //   access_token: accessToken
-    // }, function(err, user){
-    //   if (err)
-    //     res.send(err);
-
-    //   var new_user;
-
-    //   User.findOne({ 'stripe_user_id': stripeUserId }, function (err, user) {
-    //     if (err) return handleError(err);
-    //     console.log("I get called first")
-    //     new_user = user;
-    //     res.render('success_oauth', { user: new_user } );
-    //   });
-
-
-    // });
+    User.findById(userId, function(err, user){
+    if (err){
+      res.send(err)
+    } else {
+      user.stripe_user_id = stripeUserId
+      user.stripe_publishable_key = stripePublishableKey
+      user.refresh_token = refreshToken
+      user.access_token = accessToken
+      user.save(function(err){
+        if (err){
+          res.send(err)
+        } else {
+          res.render('success_oauth', {user: user})
+        };
+      });
+    }
+  });
   });
 });
 
