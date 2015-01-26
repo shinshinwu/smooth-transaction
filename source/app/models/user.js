@@ -107,29 +107,29 @@ var userSchema = new mongoose.Schema({
 
   password              : {type: String, required: true},
 
-  orgName               : {type: String /*required: true*/},
+  orgName               : {type: String, required: true},
 
-  EIN                   : {type: String, validate: einValidator /*required: true*/},
+  EIN                   : {type: String, validate: einValidator, required: true},
 
   address               : {
-                            street: {type: String /*required: true*/},
-                            zip: {type: String, validate: zipValidator /*required: true*/}
+                            street: {type: String, required: true},
+                            zip: {type: String, validate: zipValidator, required: true}
                           },
 
-  website               : {type: String, validate: websiteValidator /*required: true*/},
+  website               : {type: String, validate: websiteValidator, required: true},
 
   representative        : {
-                            firstName: {type: String /*required: true*/},
-                            lastName: {type: String /*required: true*/},
+                            firstName: {type: String, required: true},
+                            lastName: {type: String, required: true},
                             DOB: {
-                              day: {type: String, validate: dayValidator /*required: true*/},
-                              month: {type: String, validate: monthValidator /*required: true*/},
-                              year: {type: String, validate: yearValidator /*required: true*/}
+                              day: {type: String, validate: dayValidator, required: true},
+                              month: {type: String, validate: monthValidator, required: true},
+                              year: {type: String, validate: yearValidator, required: true}
                             },
-                            SSN: {type: String, validate: ssnValidator /*required: true*/}
+                            SSN: {type: String, validate: ssnValidator, required: true}
                           },
 
-  phone                 : {type: String, validate: phoneValidator /*required: true*/},
+  phone                 : {type: String, validate: phoneValidator, required: true},
 
   stripe_user_id        : {type: String, default: ''},
 
