@@ -35,11 +35,11 @@ router.get('/signup', function(req, res) {
     getUser(userId,
       // if error....
       function(err) {
-        res.redirect('/?err=' + err);
+        res.redirect('/signup?err=' + err);
     },
       // if successful
       function(user) {
-        res.render('dashboard', {user: user})
+        res.redirect('/dashboard')
     });
   }
   else {
