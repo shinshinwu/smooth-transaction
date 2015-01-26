@@ -6,14 +6,13 @@ var Q = require('q');
 /* GET home page. */
 router.get('/', function(req, res) {
 
-  var publishableKey = req.query.key;
   // var id = req.query.id
 
   // User.findOne({ 'id': id }, function (err, user) {
   //   res.render('index', { publishableKey: user.publishableKey });
   // };
 
-  res.render('index', { publishableKey: publishableKey });
+  res.render('index');
 
 });
 
@@ -22,9 +21,9 @@ router.post('/', function(req, res) {
   var publishableKey = req.body.publishableKey;
   var stripeToken = req.body.stripeToken;
   var chargeAmount = parseInt(req.body.amount);
-  // var name = req.body.name;
-  // var email = req.body.email;
-  // var zip = req.body.zip;
+  var name = req.body.name;
+  var email = req.body.email;
+  var zip = req.body.zip;
 
   console.log(chargeAmount);
 

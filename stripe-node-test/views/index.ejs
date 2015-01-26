@@ -74,7 +74,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
-  Stripe.setPublishableKey("<%- publishableKey %>");
+
+  var publishableKey = window.name;
+  console.log(publishableKey);
+
+  Stripe.setPublishableKey(publishableKey);
 
   function stripeResponseHandler(status, response) {
     var $form = $('#payment-form');
@@ -86,7 +90,6 @@
     } else {
       // response contains id and card, which contains additional card details
       var token = response.id;
-      var publishableKey = "<%- publishableKey %>";
       // Insert the token into the form so it gets submitted to the server
       $form.append($('<input type="hidden" name="stripeToken" />').val(token));
       $form.append($('<input type="hidden" name="publishableKey" />').val(publishableKey));
