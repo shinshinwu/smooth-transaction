@@ -2,30 +2,30 @@
 
   <p>Organization Info</p>
 
-  <%- include('partials/_input', {name: 'user[orgName]', label: 'Organization name: '}) %>
-  <%- include('partials/_input', {name: 'user[EIN]', label: 'EIN: '}) %>
-  <%- include('partials/_input', {name: 'user[address]', label: 'Address: '}) %>
-  <%- include('partials/_input', {name: 'user[website]', label: 'Website: '}) %>
-  <%- include('partials/_input', {name: 'user[phone]', label: 'Phone number: '}) %>
+  <%- include('partials/_input', {name: 'orgName', label: 'Organization name: '}) %>
+  <%- include('partials/_input', {name: 'EIN', label: 'EIN: '}) %>
+  <%- include('partials/_input', {name: 'address', label: 'Address: '}) %>
+  <%- include('partials/_input', {name: 'website', label: 'Website: '}) %>
+  <%- include('partials/_input', {name: 'phone', label: 'Phone number: '}) %>
 
   <p>Representaive Info</p>
 
   <div class="input-row">
     <label><span>Full name: </span>
-      <input type="text" name="user[representative.firstName]" placeholder="First name">
-      <input type="text" name="user[representative.lastName]" placeholder="Last name">
+      <input type="text" name="representative.firstName" placeholder="First name">
+      <input type="text" name="representative.lastName" placeholder="Last name">
     </label>
   </div>
 
   <div class="input-row">
     <label><span>Date of birth: </span>
-      <input type="text" name="user[representative.DOB.month]" placeholder="Month">
-      <input type="text" name="user[representative.DOB.day]" placeholder="Day">
-      <input type="text" name="user[representative.DOB.year]" placeholder="Year">
+      <input type="text" name="representative.DOB.month" placeholder="Month">
+      <input type="text" name="representative.DOB.day" placeholder="Day">
+      <input type="text" name="representative.DOB.year" placeholder="Year">
     </label>
   </div>
 
-  <%- include('partials/_input', {name: 'user[representative.SSN]', label: 'SSN (last four digits): '}) %>
+  <%- include('partials/_input', {name: 'representative.SSN', label: 'SSN (last four digits): '}) %>
 
   <p>Login Info</p>
 

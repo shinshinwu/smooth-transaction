@@ -83,15 +83,11 @@ router.get('/users', function(req, res) {
 });
 
 router.post('/users', function(req, res) {
-  var email = req.param('email');
   var password = req.param('password');
   var passwordVerify = req.param('passwordVerify');
 
   if (password === passwordVerify) {
-    User.create({
-      email: email,
-      password: password
-    }, function(err, user) {
+    User.create(req.body, function(err, user) {
       if (err) {
         res.redirect('/?err=' + err)
       }
