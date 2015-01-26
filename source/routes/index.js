@@ -48,58 +48,67 @@ router.get('/signup', function(req, res) {
   }
 });
 
+// logout and remove session id info
 router.get('/logout', function(req, res) {
-  req.session.user_id = ''
-  res.redirect('/')
+  req.session.user_id = '';
+  res.redirect('/');
 });
 
-router.post('/dashboard', function(req, res) {
+// render the dashboard page
+router.get('/dashboard', function(req, res) {
+  var userId = req.session.user_id;
+    if (userId) {
+      // if logged in, render dashboard page
+      getUser(userId,
+        // if error....
+        function(err) {
+          res.redirect('/?err=' + err);
+      },
+        // if successful
+        function(user) {
+          res.render('dashboard', {user: user})
+      });
+    }
+    else {
+      res.redirect('/')
+    }
+});
+
+// login an existing user
+router.post('/users/login', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
-  var userId = req.session.user_id
 
-  if (userId) {
-    // if logged in, render dashboard page
-    getUser(userId,
-      // if error....
-      function(err) {
-        res.redirect('/?err=' + err);
-    },
-      // if successful
-      function(user) {
-        res.render('dashboard', {user: user})
-    });
-  }
-  else {
-    User.findOne({ 'email': email }, function(err, user) {
-      if (err) {
-        res.redirect('/?err=' + err)
-      }
-      else if (!user) {
-        var error = 'Invalid email and password!'
-        res.redirect('/?err=' + error)
-      }
-      else {
-        user.comparePassword(password, function(err, isMatch) {
-          if (err) {
-            res.redirect('/?err=' + err)
+  User.findOne({ 'email': email }, function(err, user) {
+    if (err) {
+      res.redirect('/?err=' + err)
+    }
+    else if (!user) {
+      var error = 'Invalid email and password!'
+      res.redirect('/?err=' + error)
+    }
+    else {
+      user.comparePassword(password, function(err, isMatch) {
+        if (err) {
+          res.redirect('/?err=' + err)
+        }
+        else {
+          if (isMatch) {
+            req.session.user_id = user._id
+            res.redirect('/dashboard')
           }
           else {
-            if (isMatch) {
-              req.session.user_id = user._id
-              res.render('dashboard', {user: user})
-            }
-            else {
-              var error = 'Invalid email and password!'
-              res.redirect('/?err=' + error)
-            }
+            var error = 'Invalid email and password!'
+            res.redirect('/?err=' + error)
           }
-        });
-      }
-    });
-  }
+        }
+      });
+    }
+  });
+
 });
 
+// create and login a new user
 router.post('/users', function(req, res) {
   var password = req.param('password');
   var passwordVerify = req.param('passwordVerify');
