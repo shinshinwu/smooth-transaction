@@ -32,13 +32,13 @@ var userSchema = new mongoose.Schema({
 
   phone                 : {type: String, required: true},
 
-  stripe_user_id        : {type: String, required: true},
+  stripe_user_id        : {type: String, default: ''},
 
-  stripe_publishable_key: {type: String, required: true},
+  stripe_publishable_key: {type: String, default: ''},
 
-  refresh_token         : {type: String, required: true},
+  refresh_token         : {type: String, default: ''},
 
-  access_token          : {type: String, required: true},
+  access_token          : {type: String, default: ''},
 
   data                  : {
                             totalEarnings: {type: Number},
