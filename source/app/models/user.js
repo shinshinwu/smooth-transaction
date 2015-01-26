@@ -22,6 +22,18 @@ var einValidator = [
   })
 ]
 
+var zipValidator = [
+  validate({
+    validator: 'isNumeric',
+    message: 'Zipcode can only contain numbers'
+  }),
+  validate({
+    validator: 'isLength',
+    arguments: 5,
+    message: 'Zipcode must be at least 5 digits'
+  })
+]
+
 var phoneValidator = [
   validate({
     validator: 'matches',
@@ -34,7 +46,7 @@ var phoneValidator = [
 
 
 
-// Schema:
+// Schema
 var userSchema = new mongoose.Schema({
 
   email                 : {type: String, required: true, unique: true, validate: emailValidator},
