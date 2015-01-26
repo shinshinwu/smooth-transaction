@@ -4,8 +4,15 @@
 
   <%- include('partials/_input', {name: 'orgName', label: 'Organization name: '}) %>
   <%- include('partials/_input', {name: 'EIN', label: 'EIN: '}) %>
-  <%- include('partials/_input', {name: 'address', label: 'Address: '}) %>
   <%- include('partials/_input', {name: 'website', label: 'Website: '}) %>
+
+  <div class="input-row">
+    <label><span>Address: </span>
+      <input type="text" name="address.street" placeholder="Street address">
+      <input type="text" name="address.zip" placeholder="Zipcode">
+    </label>
+  </div>
+
   <%- include('partials/_input', {name: 'phone', label: 'Phone number: '}) %>
 
   <p>Representaive Info</p>
