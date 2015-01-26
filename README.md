@@ -90,6 +90,7 @@
 ### Org:
 - Earning trend over time (line chart)
 - Total accumulated earning (own database)
+- Average donation (own database)
 - Total number of donations received (own database)
 - Earning this month (stripe) YES
 - Earning today (stripe) YES

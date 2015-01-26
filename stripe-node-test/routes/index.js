@@ -49,9 +49,7 @@ router.post('/', function(req, res) {
 
 router.get('/id/charges', function(req, res){
 
-  var stripe = require("stripe")(
-    "sk_test_7UEs7v3YTK8I0fLBDpWekK6I"
-  );
+  var stripe = require("stripe")();
 
   stripe.charges.list({ limit: 5 }, function(err, charges) {
     // asynchronously called
@@ -61,9 +59,7 @@ router.get('/id/charges', function(req, res){
 
 router.get('/balance', function(req, res){
 
-  var stripe = require("stripe")(
-    "sk_test_7UEs7v3YTK8I0fLBDpWekK6I"
-  );
+  var stripe = require("stripe")();
 
   stripe.balance.retrieve(function(err, balance) {
     // asynchronously called
@@ -73,9 +69,7 @@ router.get('/balance', function(req, res){
 
 router.get('/balancehistory', function(req, res){
 
-  var stripe = require("stripe")(
-    "sk_test_7UEs7v3YTK8I0fLBDpWekK6I"
-  );
+  var stripe = require("stripe")();
 
   stripe.balance.listTransactions(
     {
@@ -86,6 +80,16 @@ router.get('/balancehistory', function(req, res){
     res.json(transactions)
   });
 })
+
+router.get('/modifyuser', function(req, res){
+
+  User.findOneAndUpdate("54c5cbaca7e231130e2d1664", { $inc: {"donation": 10} }, function(err, user){
+    if(err){console.log(err)};
+    // user.donation = 5;
+    // User.update({"stripe_user_id": user.stripe_user_id}, { $set: {"donation": 10 }}, { upsert: true }, function(err){if(err){console.log(err)}});
+    res.json(user)
+  });
+});
 
 
 
