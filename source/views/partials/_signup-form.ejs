@@ -2,9 +2,9 @@
 
   <p>Organization Info</p>
 
-  <%- include('partials/_input', {name: 'orgName', label: 'Organization name: '}) %>
-  <%- include('partials/_input', {name: 'EIN', label: 'EIN: '}) %>
-  <%- include('partials/_input', {name: 'website', label: 'Website: '}) %>
+  <%- partial('partials/_input'), {name: 'orgName', label: 'Organization name: '}) %>
+  <%- partial('partials/_input'), {name: 'EIN', label: 'EIN: '}) %>
+  <%- partial('partials/_input'), {name: 'website', label: 'Website: '}) %>
 
   <div class="input-row">
     <label><span>Address: </span>
@@ -13,7 +13,7 @@
     </label>
   </div>
 
-  <%- include('partials/_input', {name: 'phone', label: 'Phone number: '}) %>
+  <%- partial('partials/_input'), {name: 'phone', label: 'Phone number: '}) %>
 
   <p>Representaive Info</p>
 
@@ -32,7 +32,7 @@
     </label>
   </div>
 
-  <%- include('partials/_input', {name: 'representative.SSN', label: 'SSN (last four digits): '}) %>
+  <%- partial('partials/_input'), {name: 'representative.SSN', label: 'SSN (last four digits): '}) %>
 
   <p>Login Info</p>
 
