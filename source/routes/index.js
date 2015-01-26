@@ -204,6 +204,14 @@ router.get('/users/oath/callback', function(req, res){
   });
 });
 
+router.get('/iframe', function(req, res) {
+  res.render('iframe')
+});
+
+router.get('/sampleorg', function(req, res) {
+  res.render('sampleOrg')
+});
+
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
     if (err) {
