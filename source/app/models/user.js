@@ -22,6 +22,13 @@ var einValidator = [
   })
 ]
 
+var websiteValidator = [
+  validate({
+    validator: 'isURL',
+    message: 'Please enter a valid website'
+  })
+]
+
 var zipValidator = [
   validate({
     validator: 'isNumeric',
@@ -59,10 +66,10 @@ var userSchema = new mongoose.Schema({
 
   address               : {
                             street: {type: String /*required: true*/},
-                            zip: {type: String /*required: true*/}
+                            zip: {type: String, validate: zipValidator /*required: true*/}
                           },
 
-  website               : {type: String /*required: true*/},
+  website               : {type: String, validate: websiteValidator /*required: true*/},
 
   representative        : {
                             firstName: {type: String /*required: true*/},
