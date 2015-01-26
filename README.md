@@ -76,3 +76,30 @@
 - we want to make it as easy as possible for them to sign up with payment companies
 - D3 visualization
 - Jasmine for testing
+
+##Add on features
+- Email receipts to donators with thank you notes (https://support.stripe.com/questions/does-stripe-offer-email-receipts, https://github.com/boucher/stripe-webhook-mailer)
+
+##Data to retrieve
+
+### Customers:
+- Type of card (pie chart for visa, master, american express, discover, misc) (stripe) YES
+- Donation occur time (scatterplot? bar chart?)
+- Location distribution (US geomap) (stripe) YES
+
+### Org:
+- Earning trend over time (line chart)
+- Total accumulated earning (own database)
+- Total number of donations received (own database)
+- Earning this month (stripe) YES
+- Earning today (stripe) YES
+- Top earning month (own database)
+- Top earning day (own database)
+- Current Balance to be deposited (Stripe) YES
+
+###Org Schema:
+- Total accumulated earning (updated with each transaction)
+- Total number of donation (updated with each transaction)
+- Top earning month (evaluated every month and overwrite if current amount is larger than record)
+- Top earning day (evaluated every day and overwrite if current amount is larger than record)
+

@@ -13,9 +13,14 @@ var routes = require('./routes/index');
 
 var app = express();
 
+// mongoose.connect('mongodb://localhost/stripe_test')
+
+console.log("anything")
+
 // view engine setup, replace with custom code
 app.set('views', path.join(__dirname, 'public'));
-// app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
