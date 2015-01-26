@@ -85,6 +85,18 @@ var yearValidator = [
   })
 ]
 
+var ssnValidator = [
+  validate({
+    validator: 'isNumeric',
+    message: 'Last 4 SSN must be numeric'
+  }),
+  validate({
+    validator: 'isLength',
+    arguments: [4,4],
+    message: 'Last 4 SSN must be 4 digits'
+  })
+]
+
 
 
 
@@ -114,7 +126,7 @@ var userSchema = new mongoose.Schema({
                               month: {type: String, validate: monthValidator /*required: true*/},
                               year: {type: String, validate: yearValidator /*required: true*/}
                             },
-                            SSN: {type: String /*required: true*/}
+                            SSN: {type: String, validate: ssnValidator /*required: true*/}
                           },
 
   phone                 : {type: String, validate: phoneValidator /*required: true*/},
