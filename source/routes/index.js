@@ -86,13 +86,22 @@ router.get('/dashboard', function(req, res) {
       if (err) {
         res.redirect('/?err=' + err)
       }
-      else if (user.password === password) {
-        req.session.user_id = user._id
-        res.render('dashboard', {user: user})
-      }
       else {
-        err = 'Invalid email and password!'
-        res.redirect('/?err=' + err)
+        user.comparePassword(password, function(err, isMatch) {
+          if (err) {
+            res.redirect('/?err=' + err)
+          }
+          else {
+            if (isMatch) {
+              req.session.user_id = user._id
+              res.render('dashboard', {user: user})
+            }
+            else {
+              error = 'Invalid email and password!'
+              res.redirect('/?err=' + error)
+            }
+          }
+        });
       }
     });
   }
