@@ -8,37 +8,37 @@ var userSchema = new mongoose.Schema({
 
   password              : {type: String, required: true},
 
-  orgName               : {type: String, default: ''},
+  orgName               : {type: String, required: true},
 
-  EIN                   : {type: String, default: ''},
+  EIN                   : {type: String, required: true},
 
   address               : {
-                            street: {type: String, default: ''},
-                            zip: {type: String, default: ''}
+                            street: {type: String, required: true},
+                            zip: {type: String, required: true}
                           },
 
-  website               : {type: String, default: ''},
+  website               : {type: String, required: true},
 
   representative        : {
-                            firstName: {type: String, default: ''},
-                            lastName: {type: String, default: ''},
+                            firstName: {type: String, required: true},
+                            lastName: {type: String, required: true},
                             DOB: {
-                              day: {type: String, default: ''},
-                              month: {type: String, default: ''},
-                              year: {type: String, default: ''}
+                              day: {type: String, required: true},
+                              month: {type: String, required: true},
+                              year: {type: String, required: true}
                             },
-                            SSN: {type: String, default: ''}
+                            SSN: {type: String, required: true}
                           },
 
-  phone                 : {type: String, default: ''},
+  phone                 : {type: String, required: true},
 
-  stripe_user_id        : {type: String, default: ''},
+  stripe_user_id        : {type: String, required: true},
 
-  stripe_publishable_key: {type: String, default: ''},
+  stripe_publishable_key: {type: String, required: true},
 
-  refresh_token         : {type: String, default: ''},
+  refresh_token         : {type: String, required: true},
 
-  access_token          : {type: String, default: ''},
+  access_token          : {type: String, required: true},
 
   data                  : {
                             totalEarnings: {type: Number},
