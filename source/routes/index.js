@@ -48,17 +48,6 @@ router.get('/signup', function(req, res) {
   }
 });
 
-router.get('/loggedin', function(req, res) {
-  User.findOne({'_id': req.session.user_id}, function(err, user) {
-    if (err) {
-      res.redirect('/?err=' + err)
-    }
-    else {
-      res.render('dashboard', {user: user})
-    }
-  });
-});
-
 router.get('/logout', function(req, res) {
   req.session.user_id = ''
   res.redirect('/')
@@ -86,6 +75,10 @@ router.get('/dashboard', function(req, res) {
       if (err) {
         res.redirect('/?err=' + err)
       }
+      else if (!user) {
+        var error = 'Invalid email and password!'
+        res.redirect('/?err=' + error)
+      }
       else {
         user.comparePassword(password, function(err, isMatch) {
           if (err) {
@@ -97,7 +90,7 @@ router.get('/dashboard', function(req, res) {
               res.render('dashboard', {user: user})
             }
             else {
-              error = 'Invalid email and password!'
+              var error = 'Invalid email and password!'
               res.redirect('/?err=' + error)
             }
           }
