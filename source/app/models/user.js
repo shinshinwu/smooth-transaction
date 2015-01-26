@@ -86,10 +86,16 @@ var userSchema = new mongoose.Schema({
   access_token          : {type: String, default: ''},
 
   data                  : {
-                            totalEarnings: {type: Number},
-                            totalDonations: {type: Number},
-                            topMonth: {type: Date},
-                            topDay: {type: Date}
+                            totalEarnings: {type: Number, default: 0},
+                            totalDonations: {type: Number, default: 0},
+                            topMonth: {
+                              time: {type: Date, default: Date.now},
+                              amount: {type: Number, default: 0}
+                            },
+                            topDay: {
+                              time: {type: Date, default: Date.now},
+                              amount: {type: Number, default: 0}
+                            }
                           }
 });
 

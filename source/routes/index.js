@@ -148,23 +148,6 @@ router.get('/users/authorize', function(req, res){
   }));
 });
 
-// router.get('/users/:user_id',function(req, res){
-//   User.findById(req.params.user_id, function(err, user){
-//     if (err){
-//       res.send(err)
-//     } else {
-//       user.access_token = "I changed"
-//       user.save(function(err){
-//         if (err){
-//           res.send(err)
-//         } else {
-//           res.json({message: "User updated!"})
-//         };
-//       });
-//     }
-//   });
-// });
-
 router.get('/users/oath/callback', function(req, res){
 
   var userId = req.session.user_id
@@ -209,6 +192,8 @@ router.get('/users/oath/callback', function(req, res){
   });
 });
 
+// iframe stuff that can be linked on another website
+
 router.get('/iframe', function(req, res) {
   res.render('iframe')
 });
@@ -222,13 +207,13 @@ router.post('/iframe', function(req, res) {
   var email = req.body.email;
   var zip = req.body.zip;
 
-  // console.log(chargeAmount);
-
   User.findOne({ 'stripe_publishable_key': publishableKey }, function (err, user) {
       if (err) return handleError(err);
+
       var stripe = require("stripe")(user.access_token);
+      console.log(user.id)
 
-
+      // post the charges to Stripe
       var charge = stripe.charges.create({
         amount: chargeAmount*100, // amount in cents, again
         currency: "usd",
@@ -239,15 +224,23 @@ router.post('/iframe', function(req, res) {
           res.render('error')
         } else {
 
-          // need to figure out how to update entry on mongoose and change
+          // find the user in our database and update total earning and number of donation attributes
 
-          // User.findOneAndUpdate(conditions, update, options, function(err, thing){
-          //   console.log(thing)
-          // })
-          // User.update({"stripe_user_id": user.stripe_user_id }, { "donation": 10 }, {upsert: true}, function(err){ console.log (err)});
-          console.log(user.stripe_user_id)
-
-
+              User.findById(user.id, function(err, user){
+                if (err){
+                  res.send(err)
+                } else {
+                  user.data.totalEarnings += (chargeAmount*100)
+                  user.data.totalDonations += 1
+                  user.save(function(err){
+                    if (err){
+                      res.send(err)
+                    } else {
+                      res.render('success_oauth', {user: user})
+                    };
+                  });
+                }
+              });
 
           res.render('congrats', { charge: chargeAmount });
         }
@@ -255,8 +248,9 @@ router.post('/iframe', function(req, res) {
       });
 
   });
-    // render congrats page
 });
+
+// A sample page that uses the iframe tag produced after Oauth
 
 router.get('/sampleorg', function(req, res) {
   res.render('sampleOrg')
