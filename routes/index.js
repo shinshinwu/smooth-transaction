@@ -298,16 +298,28 @@ router.get('/monthlytotals', function(req, res) {
 // --------------------------------------------------------
 
 router.get('/userdata', function(req, res){
+  cosole.log(Date.now());
   res.render('d3_customer_layout', {layout: 'dashboard'})
 });
 
 // Need to write logic to update earnings live
 router.get('/dashboard/orgdata', function(req, res){
+  var userId = req.session.user_id
 
-  var stripe = require("stripe")(
-    "secret_key"
-  );
-  res.render('organizationAnalysis', {layout: 'dashboard'})
+  var secretKey;
+
+  User.findById(userId, function(err, user){
+    if (err){
+      res.send(err)
+    } else {
+      secretKey = user.access_token;
+
+      var stripe = require("stripe")(secretKey);
+
+      res.render('organizationAnalysis', {layout: 'dashboard'})
+    }
+  });
+
 });
 
 
