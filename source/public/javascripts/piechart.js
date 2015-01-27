@@ -19,13 +19,14 @@ var arc = d3.svg.arc()
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 svg.selectAll("path")
     .data(pie(data))
     .enter()
     .append("path")
+    .attr("id", function(d){ return "data" + d.value })
     .attr("fill", function(d, i) {
       return color(i);
     })
@@ -33,17 +34,6 @@ svg.selectAll("path")
     .attr("d", arc)
     .on("mouseover", arcTween(outerRadius, 0))
     .on("mouseout", arcTween(outerRadius - 20, 150));
-
-var arcs = svg.selectAll("g.arc");
-
-arcs.append("text")
-          .attr("transform", function(d) {
-            return "translate(" + arc.centroid(d) + ")";
-          })
-          .attr("text-anchor", "middle")
-          .text(function(d) {
-            return d.value;
-          });
 
 function arcTween(outerRadius, delay) {
   return function() {
@@ -53,3 +43,27 @@ function arcTween(outerRadius, delay) {
     });
   };
 }
+
+$("#data48").mouseover(function(){
+  $("#customerCardPieChart").html("<p>Visa: 48% </p>")
+})
+
+$("g").children().mouseout(function(){
+  $("#customerCardPieChart").html("")
+})
+
+$("#data28").mouseover(function(){
+  $("#customerCardPieChart").html("<p>MasterCard: 28% </p>")
+})
+
+$("#data12").mouseover(function(){
+  $("#customerCardPieChart").html("<p>American Express: 28% </p>")
+})
+
+$("#data9").mouseover(function(){
+  $("#customerCardPieChart").html("<p>Discover: 28% </p>")
+})
+
+$("#data3").mouseover(function(){
+  $("#customerCardPieChart").html("<p>Miscellaneous: 28% </p>")
+})
