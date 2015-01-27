@@ -53,19 +53,6 @@
       'font-size': '12px'
      });
 
-  svg.selectAll('text')
-     .data(dataset)
-     .enter()
-     .append('text')
-     .text(monthName)
-     .attr({
-      x: xPosition,
-      y: height - 15,
-      fill: 'white',
-      'font-family': 'Avenir',
-      'font-size': '12px'
-     });
-
 
 
   function xPosition(d, i, buffer) {
