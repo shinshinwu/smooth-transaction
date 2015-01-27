@@ -297,7 +297,11 @@ router.get('/monthlytotals', function(req, res) {
 
 router.get('/userdata', function(req, res){
   res.render('d3_customer_layout', {layout: 'dashboard'})
-})
+});
+
+router.get('/orgdata', function(req, res){
+  res.render('organizationAnalysis', {layout: 'dashboard'})
+});
 
 
 function getUser(userId, errorCallback, successCallback) {
