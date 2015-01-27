@@ -419,7 +419,7 @@ nav
 
 .page1
 {
-  background: url('../../images/vendor/bg.jpg')#131313;
+  background: url('../../assets/images/vendor/bg.jpg')#131313;
   background-size: cover;
   height: 100%;
   position: relative;
@@ -596,7 +596,7 @@ nav
 /* Preloading Animation */
 
 #loading-animation {
-    background-image: url("../../images/vendor/loading.gif") ;
+    background-image: url("../../assets/images/vendor/loading.gif") ;
     background-position: center center;
     background-repeat: no-repeat;
     height: 200px;
