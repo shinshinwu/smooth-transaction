@@ -73,11 +73,11 @@ td {
 .org-info, .org-panel, .org-name {
  margin: 1%;
  padding: 2%;
- background-color: rgba(0,0,0,0.2); 
+ background-color: rgba(0,0,0,0.2);
 }
 
 .org-name {
-  
+
 }
 
 .panel, .panel-body {
@@ -113,7 +113,7 @@ td {
 .text-filler {
  position: relative;
 }
- 
+
 footer {
  margin-top:20px;
  padding-top:20px;
@@ -243,5 +243,10 @@ circle:hover {
 
 
 #scatterplot{
-  
+
+}
+
+#orgAnalysis #balance {
+  color: #D62728;
+
 }
