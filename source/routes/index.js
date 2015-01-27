@@ -115,7 +115,6 @@ router.post('/users/login', function(req, res) {
       });
     }
   });
-
 });
 
 // create and login a new user
@@ -144,6 +143,7 @@ router.post('/users', function(req, res) {
   }
 });
 
+// authorize the user with stripe
 router.get('/users/authorize', function(req, res){
   res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
     response_type: 'code',
@@ -152,6 +152,7 @@ router.get('/users/authorize', function(req, res){
   }));
 });
 
+// callback route after authorization
 router.get('/users/oath/callback', function(req, res){
 
   var userId = req.session.user_id
@@ -196,11 +197,13 @@ router.get('/users/oath/callback', function(req, res){
   });
 });
 
+
 // iframe stuff that can be linked on another website
 
 router.get('/iframe', function(req, res) {
   res.render('iframe')
 });
+
 
 router.post('/iframe', function(req, res) {
 
@@ -261,7 +264,7 @@ router.get('/sampleorg', function(req, res) {
 });
 
 
-// --------- Route to test customers geomapping -----
+// --------- Routes to test D3 charts -----
 
 router.get('/geomap', function(req, res){
   res.render('geomap')
@@ -282,6 +285,10 @@ router.get('/forcegraph', function(req, res){
 
 router.get('/scatterplot', function(req, res){
   res.render('scatterplot')
+});
+
+router.get('/monthlytotals', function(req, res) {
+  res.render('monthly-totals')
 });
 
 // --------------------------------------------------------
