@@ -76,12 +76,13 @@ router.get('/dashboard', function(req, res) {
       },
         // if successful
         function(user) {
-          res.render('dashboard', {user: user})
+          res.render('accountInfo', { layout: 'dashboard'} )
       });
     }
     else {
       res.redirect('/')
     }
+
 });
 
 // login an existing user

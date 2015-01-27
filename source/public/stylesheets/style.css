@@ -3,7 +3,6 @@ body {
  background-color: #F6F6F6;
 }
 
-
 input[type="text"],[type="number"],[type="submit"],[type="password"], button {
    font: 15px "Avenir";
    border: 3px solid white;
