@@ -1,0 +1,101 @@
+<button class='donate'>Donate!</button>
+<div class="donation-form" style="visibility:hidden;">
+<form action="" method="POST" id="payment-form">
+ <span class="payment-errors"></span>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="20" name="amount" placeholder="Amount"/>
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="20" name="name" placeholder="Full Name" />
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="20" name="email" placeholder="Email" />
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="20" data-stripe="number" placeholder="Card Number"/>
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="7" data-stripe="cvc" placeholder="CVC"/>
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="7" data-stripe="exp-month" placeholder="MM"/>
+     <input type="text" size="7" data-stripe="exp-year" placeholder="YYYY"/>
+   </label>
+ </div>
+
+ <div class="form-row">
+   <label>
+     <input type="text" size="7" name="zip" placeholder="Zipcode" />
+   </label>
+ </div>
+
+ <button type="submit">Submit Donation</button>
+</form>
+</div>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="http://placeholdem.jackrugile.com/placeholdem.min.js"></script>
+<script type="text/javascript">
+
+  var publishableKey = window.name;
+  console.log(publishableKey);
+
+  Stripe.setPublishableKey(publishableKey);
+
+  Placeholdem( document.querySelectorAll( '[placeholder]' ) );
+
+  function stripeResponseHandler(status, response) {
+    var $form = $('#payment-form');
+
+    if (response.error) {
+      // Show the errors on the form
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('button').prop('disabled', false);
+    } else {
+      // response contains id and card, which contains additional card details
+      var token = response.id;
+      // Insert the token into the form so it gets submitted to the server
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      $form.append($('<input type="hidden" name="publishableKey" />').val(publishableKey));
+      // and submit
+      $form.get(0).submit();
+
+      console.log(response)
+    }
+  };
+
+  jQuery(function($) {
+    $('#payment-form').submit(function(event) {
+      var $form = $(this);
+
+      // Disable the submit button to prevent repeated clicks
+      $form.find('button').prop('disabled', true);
+
+      Stripe.card.createToken($form, stripeResponseHandler);
+
+      // Prevent the form from submitting with the default action
+      return false;
+    });
+
+    $('.donate').on('click', function(e){
+     $(this).remove();
+     $('.donation-form').css('visibility','visible').hide().fadeIn('slow');
+   })
+  });
+</script>
