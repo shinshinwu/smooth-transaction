@@ -267,6 +267,10 @@ router.get('/geomap', function(req, res){
   res.render('geomap')
 });
 
+router.get('/scatterplot', function(req, res){
+  res.render('scatterplot')
+});
+
 // --------------------------------------------------------
 
 
