@@ -13,94 +13,13 @@ var randomDay = function(){
 console.log(randomAmount())
 console.log(randomDay())
 
-dataset = [
-	[1, randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[randomDay(), randomAmount()],
-	[365, randomAmount()]
-]
+dataset = []
+
+for (i = 0; i < 200; i++) { 
+    var set = [randomAmount(), randomDay()]
+    console.log(set)
+    dataset.push(set)
+}
 
 // dataset = [
 // 	['January', 43],
@@ -168,7 +87,7 @@ var yAxis = d3.svg.axis()
 
 // Objects
 
-var svg = d3.select('body')
+var svg = d3.select('#scatter')
 	.append('svg')
 	.attr('width', w)
 	.attr('height', h);
