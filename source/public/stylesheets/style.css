@@ -3,9 +3,6 @@ body {
  background-color: #F6F6F6;
 }
 
-.container {
-  padding: 5%;
-}
 
 input[type="text"],[type="number"],[type="submit"],[type="password"], button {
    font: 15px "Avenir";
@@ -35,4 +32,8 @@ a {
 
 .error {
   color: red;
+}
+
+button {
+  font-family: Avenir;
 }
