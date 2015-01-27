@@ -65,7 +65,9 @@ button {
 
 
  /*SCATTERPLOT CSS*/
-.axis path,
+
+
+#scatter path,
 .axis line {
     fill: none;
     stroke: black;
