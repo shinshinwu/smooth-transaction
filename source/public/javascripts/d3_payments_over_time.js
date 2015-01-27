@@ -173,7 +173,10 @@ var svg = d3.select('body')
 	.attr('width', w)
 	.attr('height', h);
 
-svg.selectAll('circle')
+svg.append('g')
+	.attr('id', 'circles')
+	.attr('clip-path', 'url(#chart-area)')
+	.selectAll('circle')
 	.data(dataset)
 	.enter()
 	.append("circle")
@@ -268,6 +271,15 @@ d3.select("p")
 		.call(yAxis)
 
 });
+
+//Define clipping path
+svg.append("clipPath")                  //Make a new clipPath
+    .attr("id", "chart-area")           //Assign an ID
+    .append("rect")                     //Within the clipPath, create a new rect
+    .attr("x", padding)                 //Set rect's position and size…
+    .attr("y", padding)
+    .attr("width", w - padding * 3)
+    .attr("height", h - padding * 2);
 
 // Text
 
