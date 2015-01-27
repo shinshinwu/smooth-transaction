@@ -270,6 +270,12 @@ router.get('/geomap', function(req, res){
   res.render('geomap')
 });
 
+// --------- Route to test customers card type pie chart -----
+
+router.get('/piechart', function(req, res){
+  res.render('piechart')
+
+
 router.get('/scatterplot', function(req, res){
   res.render('scatterplot')
 });
