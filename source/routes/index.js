@@ -287,6 +287,10 @@ router.get('/scatterplot', function(req, res){
 
 // --------------------------------------------------------
 
+router.get('/userdata', function(req, res){
+  res.render('d3_layout')
+})
+
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
