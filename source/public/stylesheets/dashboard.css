@@ -160,3 +160,16 @@ circle:hover {
         font-size: 16px;
         line-height: 20px;
 }
+
+#piechart{
+  position: relative;
+  width: 50%;
+}
+
+#geomap{
+
+}
+
+#scatterplot{
+  
+}

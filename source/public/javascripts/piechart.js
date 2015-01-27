@@ -16,7 +16,7 @@ var arc = d3.svg.arc()
     .padRadius(outerRadius)
     .innerRadius(innerRadius);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#customerCardPieChart").append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
