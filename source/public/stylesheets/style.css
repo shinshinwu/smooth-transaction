@@ -34,6 +34,11 @@ a {
   color: red;
 }
 
+#customerMap {
+  width: 800px;
+  height: 400px;
+}
+
 button {
   font-family: Avenir;
 }

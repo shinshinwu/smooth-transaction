@@ -261,6 +261,15 @@ router.get('/sampleorg', function(req, res) {
 });
 
 
+// --------- Route to test customers geomapping -----
+
+router.get('/geomap', function(req, res){
+  res.render('geomap')
+});
+
+// --------------------------------------------------------
+
+
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
     if (err) {
