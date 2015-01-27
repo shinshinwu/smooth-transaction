@@ -23,44 +23,45 @@
     <div class="col-sm-9">
       <div class="text-filler">    	
       <!-- column 2 -->	
-      <a href="#"><strong><h1>Muh Dashberrrd</h1></strong></a>     
+      <a href="#">
+      	<strong>
+      		<div class="org-name">
+		      	<h1>
+		      		<%= user.orgName %>
+		      	</h1>
+		    </div>
+      	</strong>
+      </a>     
 		    <div class="row">
             <!-- center left-->	
          	<div class="col-md-6">  
-
-              <div class="btn-group btn-group-justified">
-                <a href="#" class="btn btn-primary col-sm-3">Smooth</a>
-                <a href="#" class="btn btn-primary col-sm-3">Smooth</a>
-                <a href="#" class="btn btn-primary col-sm-3">Smooth</a>
-                <a href="#" class="btn btn-primary col-sm-3">Smooth</a>
-              </div>
               
-              <div class="panel panel-default">
+              <div class="org-panel">
+                <h4>Organization Information:</h4>
+              </div>
+                    <div class="org-info">
+                    	<p>Email: <%= user.email %></p>
+                    	<p>Encrypted Passowrd: <%= user.password %></p>
+                    	<p>EIN: <%= user.EIN %></p>
+                    	<p>Address: <%= user.address.street + ' '+ user.address.zip %></p>
+                    	<p>Website: <%= user.website %></p>
+                    	<p>Representative: 
+                    		<ul>
+                    			<li>Name: <%= user.representative.firstName + ' ' + user.representative.lastName %></li>
+                    			<li>Date of Birthday: <%= user.representative.DOB.day + " " + user.representative.DOB.month + " " + user.representative.DOB.year %></li>
+                    		</ul>
+                    	</p>
+                    	<p>Phone Number: <%= user.phone %></p>
+                    	
+                    </div>
 
-                <div class="panel-heading">
-                  <h4>Reports</h4>
-                </div>
 
 
-                <div class="panel-body">
-                  <small>Smooth</small>
-                  <div class="progress">
-                    
-                  </div>
-                  <small>Smooth</small>
-                  <div class="progress">
-                  
-                  </div>
-                  <small>Smooth</small>
-                  <div class="progress">
 
-                  </div>
-                  <small>Smooth</small>
-                  <div class="progress">
-                  </div>
-                </div><!--/panel-body-->
 
-              </div><!--/panel-->
+
+
+              <!--/panel-->
 	
               <div class="container">
                 <div class="col-md-4">
@@ -80,13 +81,14 @@
 
               <div class="panel-heading"> 
                 <!-- logic to display either a link to sync your stripe id or iframe tag depending if user has synced account-->
-                <h4>Good place to put iFrame Tag</h4>
-                <a href="/users/authorize">Click here to connect your strip account</a>
+                <% if (user.stripe_user_id === '') { %>
+                <a href="/users/authorize"><button class="connect-stripe">Click here to connect your strip account</button></a>
+            	<% } else { %>
+            		<h4>iFrame Tag</h4>
+            	<%} %>
 
-              </div>
 
 
-              <div class="panel-body">  
               </div>
             </div>
 

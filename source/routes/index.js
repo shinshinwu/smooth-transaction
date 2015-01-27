@@ -76,7 +76,8 @@ router.get('/dashboard', function(req, res) {
       },
         // if successful
         function(user) {
-          res.render('accountInfo', { layout: 'dashboard'} )
+          res.render('accountInfo', { layout: 'dashboard',
+                                      user: user})
       });
     }
     else {
@@ -190,7 +191,8 @@ router.get('/users/oath/callback', function(req, res){
         if (err){
           res.send(err)
         } else {
-          res.render('success_oauth', {user: user})
+          res.render('accountInfo', {user: user,
+                                     layout: 'dashboard'})
         };
       });
     }
