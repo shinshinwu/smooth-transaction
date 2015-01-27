@@ -274,6 +274,13 @@ router.get('/geomap', function(req, res){
 
 router.get('/piechart', function(req, res){
   res.render('piechart')
+});
+
+// --------- Route to test payment over year force graph -----
+
+router.get('/forcegraph', function(req, res){
+  res.render('forcegraph')
+});
 
 
 router.get('/scatterplot', function(req, res){
