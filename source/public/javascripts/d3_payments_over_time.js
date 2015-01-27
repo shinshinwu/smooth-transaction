@@ -104,17 +104,17 @@ svg.append('g')
 		var xPosition = parseFloat(d3.select(this).attr("cx"))
 		var yPosition = parseFloat(d3.select(this).attr("cy"))
 
-		d3.select('#tooltip')
+		d3.select('#scatter-tooltip')
 			.style('left', xPosition + 'px')
 			.style("left", xPosition + "px")
 		  .style("top", yPosition + "px")
 		  .select("#value")
 		  .text(d[1]);
 
-		d3.select('#tooltip').classed('hidden', false)
+		d3.select('#scatter-tooltip').classed('hidden', false)
 	})
 	.on('mouseout', function(){
-		d3.select('#tooltip').classed('hidden', true)
+		d3.select('#scatter-tooltip').classed('hidden', true)
 	})
 	.attr('cx', function(d){
 		return xScale(d[0]);

@@ -279,6 +279,7 @@ router.get('/forcegraph', function(req, res){
   res.render('forcegraph')
 });
 
+// --------- Route to test scatterplot over one year -----
 
 router.get('/scatterplot', function(req, res){
   res.render('scatterplot')

@@ -4,20 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/dashboard.css">
 </head>
 <body>
-<div id='header'><a href="#"><span class='navbar-brand'>Smooth</span></a></div>
+
 	<div class='main-div'>
-		<div class='thank-you'><h1>Thank you for authenticating your account <%- user.orgName %>!</h1></div>
+		<h3 class='thank-you'>Copy and implement the code below to start collecting donations.</h3>
 
-		<div class='thank-you'><h3>Your Secret Key: <%- user.access_token %></h3></div>
-
-		<h3 class='thank-you'>Your Publishable Key: <%- user.stripe_publishable_key %></h3>
-
-		<h3 class='thank-you'>Now copy and paste the below code to your website where you would like the donation widget to appear and start collecting donations!</h3>
-
-		<div>
-			<h4 class='thank-you'>Please copy and paste the code below to imbed our widget in to your site:</h4>
-
-			<xmp class='thank-you'><iframe src="http://localhost:3000/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0"></iframe></xmp>
+		<div class='key-container'>
+			<xmp><iframe src="http://localhost:3000/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0"></iframe></xmp>
 		</div>
 
 	</div>
