@@ -49,7 +49,7 @@
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis)
-      .append("text")
+        .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
@@ -76,6 +76,23 @@
               .duration(350)
             .attr("fill", "rgb(0, 0, " + (Math.round(d.donations/10 -230)) + ")");
         });
+
+    //Create labels some reason not working
+      // svg.selectAll("text")
+      //    .data(data)
+      //    .enter()
+      //    .append("text")
+      //    .text(function(d) {
+      //       return d.donations;
+      //    })
+      //    .attr("text-anchor", "middle")
+      //    .attr("x", function(d) { return x(d.month); })
+      //    .attr("y", function(d) {
+      //       return height - y(d.donations) + 14;
+      //    })
+      //    .attr("font-family", "sans-serif")
+      //    .attr("font-size", "11px")
+      //    .attr("fill", "white");
 
   });
 
