@@ -26,5 +26,9 @@
     "request": "^2.51.0",
     "serve-favicon": "~2.2.0",
     "stripe": "*"
+  },
+  "engines": {
+    "node": "v0.10.33",
+    "npm": "1.4.28"
   }
 }
