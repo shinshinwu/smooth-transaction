@@ -45,25 +45,25 @@ function arcTween(outerRadius, delay) {
 }
 
 $("#data48").mouseover(function(){
-  $("#customerCardPieChart").html("<p>Visa: 48% </p>")
+  $("#piechart #legend").html("<p>Visa: 48% </p>")
 })
 
-$("g").children().mouseout(function(){
-  $("#customerCardPieChart").html("")
+$("#customerCardPieChart g").children().mouseout(function(){
+  $("#piechart #legend").html("")
 })
 
 $("#data28").mouseover(function(){
-  $("#customerCardPieChart").html("<p>MasterCard: 28% </p>")
+  $("#piechart #legend").html("<p>MasterCard: 28% </p>")
 })
 
 $("#data12").mouseover(function(){
-  $("#customerCardPieChart").html("<p>American Express: 28% </p>")
+  $("#piechart #legend").html("<p>American Express: 28% </p>")
 })
 
 $("#data9").mouseover(function(){
-  $("#customerCardPieChart").html("<p>Discover: 28% </p>")
+  $("#piechart #legend").html("<p>Discover: 28% </p>")
 })
 
 $("#data3").mouseover(function(){
-  $("#customerCardPieChart").html("<p>Miscellaneous: 28% </p>")
+  $("#piechart #legend").html("<p>Miscellaneous: 28% </p>")
 })

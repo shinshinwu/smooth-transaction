@@ -296,7 +296,7 @@ router.get('/monthlytotals', function(req, res) {
 // --------------------------------------------------------
 
 router.get('/userdata', function(req, res){
-  res.render('d3_layout')
+  res.render('d3_customer_layout', {layout: 'dashboard'})
 })
 
 
