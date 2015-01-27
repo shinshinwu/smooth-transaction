@@ -271,6 +271,10 @@ router.get('/geomap', function(req, res){
 
 router.get('/piechart', function(req, res){
   res.render('piechart')
+
+
+router.get('/scatterplot', function(req, res){
+  res.render('scatterplot')
 });
 
 // --------------------------------------------------------
