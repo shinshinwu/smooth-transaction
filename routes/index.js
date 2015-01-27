@@ -301,7 +301,12 @@ router.get('/userdata', function(req, res){
   res.render('d3_customer_layout', {layout: 'dashboard'})
 });
 
-router.get('/orgdata', function(req, res){
+// Need to write logic to update earnings live
+router.get('/dashboard/orgdata', function(req, res){
+
+  var stripe = require("stripe")(
+    "secret_key"
+  );
   res.render('organizationAnalysis', {layout: 'dashboard'})
 });
 

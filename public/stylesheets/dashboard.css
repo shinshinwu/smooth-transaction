@@ -247,7 +247,19 @@ circle:hover {
 
 }
 
-#orgAnalysis #balance {
-  color: #D62728;
+.orgAnalysis {
+  width: 100%;
+  height: 800px;
+}
 
+.orgAnalysis #barchart {
+  display: block;
+}
+
+.orgAnalysis #balance {
+  background-color: #D9544F;
+  width: 35%;
+  height: 15%;
+  border-radius: 15px;
+  opacity: 0.9;
 }
