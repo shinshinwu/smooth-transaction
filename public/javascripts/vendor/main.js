@@ -84,23 +84,18 @@ $('.sign-up').on('click', function(e){
 
 
 
-//append error message to modal for login
+//append error message to modal for login and signup forms
 //otherwise redirect to dashboard
 
 
 bindFormActions('#login', '.login-modal .error')
 bindFormActions('#signup', '.sign-up-modal .error')
 
-
-function appendErrorsOrRedirect(data, nodeForErrors) {
-    var error = data.error
-    var redirect = data.redirect
-    if (error) {
-        $(nodeForErrors).text(error);
-    }
-    else if (redirect) {
-        window.location.href = redirect;
-    }
+function bindFormActions(formId, nodeForErrors) {
+    $(formId).on('submit', function(e) {
+        e.preventDefault();
+        ajaxFormErrors(formId, nodeForErrors);
+    });
 }
 
 function ajaxFormErrors(formId, nodeForErrors) {
@@ -113,12 +108,18 @@ function ajaxFormErrors(formId, nodeForErrors) {
     });
 }
 
-function bindFormActions(formId, nodeForErrors) {
-    $(formId).on('submit', function(e) {
-        e.preventDefault();
-        ajaxFormErrors(formId, nodeForErrors);
-    });
+function appendErrorsOrRedirect(data, nodeForErrors) {
+    var error = data.error
+    var redirect = data.redirect
+    if (error) {
+        $(nodeForErrors).text(error);
+    }
+    else if (redirect) {
+        window.location.href = redirect;
+    }
 }
+
+
 
 
 /*-----------------------------------------------------------------------------------*/
