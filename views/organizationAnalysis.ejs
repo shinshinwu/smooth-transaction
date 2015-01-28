@@ -1,34 +1,65 @@
-<div class="orgAnalysis">
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Smooth</a>
+    </div>
+  </div><!-- /container -->
+</div>
+<!-- /Header -->
+<!-- Main -->
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-3">
+      <!-- Left column -->
+    <div class="left-side-btns">
+      <a href="localhost:3000/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
+      <a href="localhost:3000/"><button data-icon="&#xe607;">Customer Analysis</button></a>
+      <a href="localhost:3000/"><button data-icon="&#xe608;">Organization Analysis</button></a>
+      <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
+    </div>
+  </div><!-- /col-3 -->
 
-  <h3>Your Organization's Donation Analysis</h3>
+  <div class="orgAnalysis">
 
-  <div class="donation-analysis" id="earning-today">
-    <h4>Donation Earning Today</h4>
-    <h6>$<%- org.dailyTotal %></h6>
-  </div>
-  <div class="donation-analysis" id="earning-month">
-    <h4>Donation Earning This Month</h4>
-    <h6>$<%- org.monthlyTotal %></h6>
-  </div>
-  <div class="donation-analysis" id="balance">
-    <h4>Current Deposible Balance</h4>
-    <h6>$<%- org.currentBalance %></h6>
-  </div>
-  <div class="donation-analysis" id="total-earnings">
-    <h4>Total Earnings To Date</h4>
-    <h6>$<%- org.totalEarnings %></h6>
-  </div>
-  <div class="donation-analysis" id="total-donations">
-    <h4>Total Number of Donations To Date</h4>
-    <h6><%- org.totalDonations %></h6>
-  </div>
-  <div class="donation-analysis" id="avg-donations">
-    <h4>Average Donations Per Transaction</h4>
-    <h6>$<%- (org.totalEarnings / org.totalDonations) %></h6>
-  </div>
+    <h3>Your Organization's Donation Analysis</h3>
 
-  <div class="donation-analysis" id="barchart"></div>
+    <div class="donation-analysis" id="earning-today">
+      <div class="iconMoon" data-icon="&#xe600;"></div>
+      <h4>Donation Earning Today</h4>
+      <h1>$<%- org.dailyTotal %></h1>
+    </div>
+    <div class="donation-analysis" id="earning-month">
+      <div class="iconMoon" data-icon="&#xe609;"></div>
+      <h4>Donation Earning This Month</h4>
+      <h1>$<%- org.monthlyTotal %></h1>
+    </div>
+    <div class="donation-analysis" id="balance">
+      <div class="iconMoon" data-icon="&#xe601;"></div>
+      <h4>Current Deposible Balance</h4>
+      <h1>$<%- org.currentBalance %></h1>
+    </div>
+    <div class="donation-analysis" id="total-earnings">
+      <div class="iconMoon" data-icon="&#xe604;"></div>
+      <h4>Total Earnings To Date</h4>
+      <h1>$<%- org.totalEarnings %></h1>
+    </div>
+    <div class="donation-analysis" id="total-donations">
+      <div class="iconMoon" data-icon="&#xe605;"></div>
+      <h4>Total Number of Donations To Date</h4>
+      <h1><%- org.totalDonations %></h1>
+    </div>
+    <div class="donation-analysis" id="avg-donations">
+      <div class="iconMoon" data-icon="&#xe603;"></div>
+      <h4>Average Donations Per Transaction</h4>
+      <h1>$<%- (org.totalEarnings / org.totalDonations) %></h1>
+    </div>
 
+    <div class="donation-analysis" id="barchart">
+      <div id="title"><h2>Your Organization's Donation Distribution in 2014</h2></div>
+    </div>
+
+  </div>
+</div>
 </div>
 
 <script type='text/javascript' src='javascripts/organizationAnalysis.js'></script>

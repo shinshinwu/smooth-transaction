@@ -52,7 +52,7 @@
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
-        .attr("dy", ".71em")
+        .attr("dy", "1em")
         .style("text-anchor", "end")
         .text("Value ($)");
 
