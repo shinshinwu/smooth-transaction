@@ -102,13 +102,14 @@ router.post('/users/login', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
   var errorMsg = 'Invalid email and password!'
+  var customErr = { "invalid": { message: errorMsg } }
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
       res.json({errors: err})
     }
     else if (!user) {
-      res.json({errors: errorMsg})
+      res.json({errors: customErr});
     }
     else {
       user.comparePassword(password, function(err, isMatch) {
@@ -120,7 +121,7 @@ router.post('/users/login', function(req, res) {
           res.json({redirect: 'dashboard'})
         }
         else {
-          res.json({errors: errorMsg})
+          res.json({errors: customErr});
         }
       });
     }
@@ -132,11 +133,16 @@ router.post('/users/login', function(req, res) {
 // create and login a new user
 router.post('/users', function(req, res) {
   var password = req.param('password');
+  console.log(password)
   var passwordVerify = req.param('passwordVerify');
+  var passLengthErr = { "invalid": { message: 'Password must be at least 8 characters' } }
+  var passMatchErr = { "invalid": { message: 'Passwords do not match' } }
 
-  if (password.length < 8) {
-    err = "Password must be at least 8 characters"
-    res.json({errors: err})
+  if (!password) {
+    res.json({errors: passLengthErr})
+  }
+  else if (password.length < 8) {
+    res.json({errors: passLengthErr})
   }
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
@@ -151,8 +157,7 @@ router.post('/users', function(req, res) {
     });
   }
   else {
-    err = "Passwords do not match!"
-    res.json({errors: err})
+    res.json({errors: passMatchErr})
   }
 });
 
