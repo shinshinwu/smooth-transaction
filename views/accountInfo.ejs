@@ -24,7 +24,6 @@
     <div class="col-sm-9">
       <div class="text-filler">
       <!-- column 2 -->
-      <a href="#">
       	<strong>
       		<div class="org-name">
 		      	<h1>
@@ -32,7 +31,6 @@
 		      	</h1>
 		    </div>
       	</strong>
-      </a>
 		    <div class="row">
             <!-- center left-->
          	<div class="col-md-6">
@@ -42,7 +40,6 @@
               </div>
                     <div class="org-info">
                     	<p>Email: <%= user.email %></p>
-                    	<p>Encrypted Passowrd: <%= user.password %></p>
                     	<p>EIN: <%= user.EIN %></p>
                     	<p>Address: <%= user.address.street + ' '+ user.address.zip %></p>
                     	<p>Website: <%= user.website %></p>
@@ -77,7 +74,9 @@
             	<% } else { %>
                 <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
                 <hr>
-            		<xmp><iframe src="https://smooth-transaction.herokuapp.com/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
+                <div class="iframe-tag">
+            		  <xmp><iframe src="https://smooth-transaction.herokuapp.com/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
+                </div>
             	<%} %>
               </div>
 
