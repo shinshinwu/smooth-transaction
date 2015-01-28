@@ -63,4 +63,25 @@ button {
   transition-delay: 0;
 }
 
+.birthday {
+  width: 10%;
+}
 
+.input-label {
+  font-size: 1em;
+}
+
+.signup-section {
+  border-top: 1px solid #CFCFCF;
+  margin-top: 1em;
+}
+
+.form-submit {
+  width: 32%;
+}
+
+.form-submit:hover {
+  background-color: #808080;
+  color: white;
+  cursor: pointer;
+}

@@ -1,54 +1,49 @@
 <form action="/users" method="POST" id="signup">
 
-  <p>Organization Info</p>
-
-  <%- partial('partials/_input', {name: 'orgName', label: 'Organization name: '}) %>
-  <%- partial('partials/_input', {name: 'EIN', label: 'EIN: '}) %>
-  <%- partial('partials/_input', {name: 'website', label: 'Website: '}) %>
+  <p class="signup-section">Organization Info</p>
 
   <div class="input-row">
-    <label><span>Address: </span>
-      <input type="text" name="address.street" placeholder="Street address">
-      <input type="text" name="address.zip" placeholder="Zipcode">
+    <input type="text" placeholder="Organization name" name="orgName">
+    <input type="text" placeholder="EIN" name="EIN">
+    <input type="text" placeholder="Website http(s)://..." name="website">
+  </div>
+
+  <div class="input-row">
+    <input type="text" placeholder="Street address" name="address.street">
+    <input type="text" placeholder="Zipcode" name="address.zip">
+    <input type="text" placeholder="Phone number" name="phone">
+  </div>
+
+
+  <p class="signup-section">Representaive Info</p>
+
+  <div class="input-row">
+    <input type="text" placeholder="First name" name="representative.firstName">
+    <label><span class="input-label">Date of Birth: </span>
+      <input class="birthday" type="text" name="representative.DOB.month" placeholder="Month">
+      <input class="birthday" type="text" name="representative.DOB.day" placeholder="Day">
+      <input class="birthday" type="text" name="representative.DOB.year" placeholder="Year">
     </label>
   </div>
 
-  <%- partial('partials/_input', {name: 'phone', label: 'Phone number: '}) %>
+  <div class="input-row">
+    <input type="text" placeholder="Last name" name="representative.lastName">
+    <input type="text" placeholder="SSN (last four digits)" name="representative.SSN">
+  </div>
 
-  <p>Representaive Info</p>
+  <p class="signup-section">Login Info</p>
+
+  <%- partial('partials/_input', {name: 'email', placeholder: 'Enter your email'}) %>
 
   <div class="input-row">
-    <label><span>Full name: </span>
-      <input type="text" name="representative.firstName" placeholder="First name">
-      <input type="text" name="representative.lastName" placeholder="Last name">
-    </label>
+    <input type="password" name="password"><span class="input-label"> (Enter a password)</span>
   </div>
 
   <div class="input-row">
-    <label><span>Date of birth: </span>
-      <input type="text" name="representative.DOB.month" placeholder="Month">
-      <input type="text" name="representative.DOB.day" placeholder="Day">
-      <input type="text" name="representative.DOB.year" placeholder="Year">
-    </label>
-  </div>
-
-  <%- partial('partials/_input', {name: 'representative.SSN', label: 'SSN (last four digits): '}) %>
-
-  <p>Login Info</p>
-
-  <div class="input-row">
-    <input type="text" placeholder="Enter your email" name="email">
+    <input type="password" name="passwordVerify"><span class="input-label"> (Verify your password)</span>
   </div>
 
   <div class="input-row">
-    <input type="password" placeholder="Enter your password" name="password">
-  </div>
-
-  <div class="input-row">
-    <input type="password" placeholder="Verify your password" name="passwordVerify">
-  </div>
-
-  <div class="input-row">
-    <input type="submit" value="Sign Up">
+    <input class="form-submit"type="submit" value="Sign Up">
   </div>
 </form>
