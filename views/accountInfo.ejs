@@ -12,9 +12,9 @@
 	<div class="col-sm-3">
       <!-- Left column -->
     <div class="left-side-btns">
-      <a href="localhost:3000/dashboard"><button>Account Information</button></a>
-      <a href="localhost:3000/"><button>Customer Analysis</button></a>
-      <a href="localhost:3000/"><button>Organization Analysis</button></a>
+      <a href="/dashboard"><button>Account Information</button></a>
+      <a href="/"><button>Customer Analysis</button></a>
+      <a href="/"><button>Organization Analysis</button></a>
       <a href="/logout"><button>Log Out</button></a>
     </div>          
   </div><!-- /col-3 -->
@@ -85,7 +85,7 @@
             	<% } else { %>
                 <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
                 <hr>
-            		<xmp><iframe src="http://localhost:3000/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
+            		<xmp><iframe src="https://smooth-transaction.herokuapp.com/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
             	<%} %>
               </div>
 
