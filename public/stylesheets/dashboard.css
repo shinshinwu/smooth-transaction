@@ -185,11 +185,11 @@ circle:hover {
 
 #pie-container{
   position: absolute;
-  top: 3%;
-  right:3%;
+  top: 7%;
+  right:4%;
   text-align: center;
   width: 30%;
-  height: 50%;
+  height: 48%;
   background-color: rgba(255,255,255,0.2);
   border-radius: 15px;
 }
@@ -212,33 +212,36 @@ circle:hover {
 
 #pie-container #container{
 }
+
 /*Geomap*/
 
 #geomap{
   position: absolute;
-  top: 3%;
-  left:3%;
+  top: 7%;
+  left:10%;
   text-align: center;
-  width: 60%;
-  height: 50%;
+  width: 55%;
+  height: 48%;
   background-color: rgba(255,255,255,0.2);
   border-radius: 15px;
 }
 
 #geomap-container{
   position: absolute;
-  height: 100%;
+
   width: 100%;
 }
 
 #customerMap{
-  min-height: 108%;
-  width:80%;
+  position: relative;
+  width:85%;
+  height: 90%;
   left: -5%;
+
 }
 
 #customerMap .datamap{
-  position:;
+  margin-top: 2%;
   min-height: 400px;
   min-width: 100%;
 }
@@ -257,14 +260,14 @@ circle:hover {
   position: absolute;
   width: 20%;
   bottom: 5%;
-  right: 0%;
+  right: 5%;
 }
 
 
 #scatterplot{
   position: absolute;
   bottom: 5%;
-  left: 3%;
+  left: 10%;
   backgit statusground-color: rgba(255,255,255,0.2);
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -284,6 +287,7 @@ circle:hover {
 
 .scatterplot-data-display .text{
   text-align: center;
+
 }
 
 .orgAnalysis {

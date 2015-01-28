@@ -1,4 +1,4 @@
-var w = 1640;
+var w = 1500;
 var h = 300;
 var padding = 30
 

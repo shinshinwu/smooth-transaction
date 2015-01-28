@@ -301,8 +301,8 @@ router.get('/userdata', function(req, res){
   res.render('d3_customer_layout', {layout: 'dashboard'})
 });
 
-router.get('/donorinfo', function(req, res){
-  res.render('donorinfo', {layout: 'dashboard'})
+router.get('/graphs', function(req, res){
+  res.render('graphs', {layout: 'dashboard'})
 });
 
 // Need to write logic to update earnings live
