@@ -13,7 +13,7 @@ var randomDay = function(){
 dataset = []
 
 for (i = 0; i < 1000; i++) { 
-    var set = [randomAmount(), randomDay()]
+    var set = [randomDay(), randomAmount()]
     dataset.push(set)
 }
 
@@ -77,9 +77,16 @@ svg.append('g')
 	.append("circle")
 	.attr('fill', '#274AB3')
 	.on('mouseover', function(d){
+
+		function dateFromDay(year, day){
+  		var date = new Date(year, 0);
+  		return String(new Date(date.setDate(day)));
+		}
+
 		console.log(d[1])
+		console.log(d[0])
 		$('.scatterplot-data-text').css('visibility', 'visible')
-		$('.scatterplot-data-text').html('$'+d[1])
+		$('.scatterplot-data-text').html('$'+d[1]+' on '+dateFromDay(2014, d[0]).substring(0, dateFromDay.length + 14))
 
 		// var xPosition = parseFloat(d3.select(this).attr("cx"))
 		// var yPosition = parseFloat(d3.select(this).attr("cy"))
