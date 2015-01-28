@@ -112,7 +112,7 @@ function appendErrorsOrRedirect(data, nodeForErrors) {
     var errors = data.errors
     var redirect = data.redirect
     if (errors) {
-        $(nodeForErrors).text(error);
+        $(nodeForErrors).text(errors);
     }
     else if (redirect) {
         window.location.href = redirect;
