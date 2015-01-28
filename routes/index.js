@@ -301,8 +301,59 @@ router.get('/userdata', function(req, res){
   res.render('d3_customer_layout', {layout: 'dashboard'})
 });
 
+// Need to write logic to update earnings live
 router.get('/orgdata', function(req, res){
-  res.render('organizationAnalysis', {layout: 'dashboard'})
+
+  var userId = req.session.user_id
+
+  var now = new Date();
+  var startOfDay = (new Date(now.getFullYear(), now.getMonth(), now.getDate()))/1000;
+  var startOfMonth = (new Date(now.getFullYear(), now.getMonth()))/1000;
+
+  var org = {};
+  var secretKey;
+
+  User.findById(userId, function(err, user){
+    if (err){
+      res.send(err)
+    } else {
+
+      secretKey = user.access_token;
+      org.totalEarnings = (user.data.totalEarnings/100);
+      org.totalDonations = user.data.totalDonations;
+
+      var stripe = require("stripe")(secretKey);
+
+      // get list of jsons for daily transactions
+      stripe.balance.listTransactions(
+        {
+          created:
+            { gte: startOfDay
+            }
+        }, function(err, transactions) {
+        org.dailyTotal = getTotalAmount(transactions);
+      });
+
+      // get current balance from account
+      stripe.balance.retrieve(function(err, balance) {
+        org.currentBalance = (balance.pending[0].amount/100);
+      });
+
+      // get list of jsons for monthly transactions
+      stripe.balance.listTransactions(
+        {
+          created:
+            { gte: startOfMonth
+            }
+        }, function(err, transactions) {
+        org.monthlyTotal = getTotalAmount(transactions);
+        res.render('organizationAnalysis', { org: org, layout: 'dashboard'})
+      });
+
+
+    }
+  });
+
 });
 
 
@@ -315,7 +366,17 @@ function getUser(userId, errorCallback, successCallback) {
       successCallback(user);
     }
   });
-}
+};
+
+// helper methods to iterate through transaction json object returned from stripe to get total amount
+function getTotalAmount(jsonList) {
+  var count = 0;
+  for (i = 0; i < jsonList.data.length; i++) {
+    count += jsonList.data[i].amount
+  };
+  // convert to $$$dollars
+  return count/100;
+};
 
 
 
