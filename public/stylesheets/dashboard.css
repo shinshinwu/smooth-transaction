@@ -318,7 +318,7 @@ circle:hover {
   height: 800px;
   margin: 0 auto;
   padding: 5%;
-  padding-top: 1%;
+  padding-top: 0;
 }
 
 .orgAnalysis h3 {
@@ -337,13 +337,20 @@ circle:hover {
   font-size: 0.4em;
 }
 
+/*shit not aligned, need to fix*/
+.orgAnalysis #barchart #title {
+  width: 90%;
+  text-align: center;
+  margin-left: 35%;
+}
+
 .orgAnalysis .donation-analysis {
   display: inline-block;
   width: 30%;
-  height: 20%;
+  height: 27.5%;
   text-align: center;
   vertical-align: top;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   margin-left: 2.5%;
   padding-top: 1%;
   border-radius: 20px;
@@ -351,12 +358,12 @@ circle:hover {
   font-size: 2em;
 }
 
-.orgAnalysis .donation-analysis .iconMoon {
-
-}
-
 .orgAnalysis .donation-analysis:hover {
   opacity: 1;
+}
+
+.orgAnalysis .donation-analysis [data-icon]::before {
+  font-size: 2.5em;
 }
 
 .orgAnalysis #earning-today {
