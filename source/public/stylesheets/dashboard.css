@@ -5,8 +5,7 @@
 
 html {
 width: 100%;
-height:;
-background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/03/24/62691/ed094905bfae8348ff3142d71315c885.jpg);
+background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/03/24/62691/ed094905bfae8348ff3142d71315c885.jpg) 
 }
 
 body {
@@ -69,8 +68,6 @@ td {
 
 .panel, .panel-heading {
  margin-top:1%;
- word-wrap: break-word;
- position: relative;
 }
 
 .org-info, .org-panel, .org-name {
@@ -79,12 +76,8 @@ td {
  background-color: rgba(0,0,0,0.2);
 }
 
-.panel-heading {
-    background-color: rgba(0,0,0,0.2);
-}
+.org-name {
 
-.table {
-  margin-top: 2%;
 }
 
 .panel, .panel-body {
