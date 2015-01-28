@@ -13,18 +13,33 @@
 		<script type='text/javascript' src="javascripts/vendor/d3.js"></script>
 	</head>
 	<body>
-<!-- Header -->
+<!-- Header -->	
 
-
-
-
-
-
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Smooth</a>
+    </div>
+  </div><!-- /container -->
+</div>
+<!-- /Header -->
+<!-- Main -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <!-- Left column -->
+      <div class="left-side-btns">
+        <a href="/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
+        <a href="/graphs"><button data-icon="&#xe607;">Customer Analysis</button></a>
+        <a href="/orgdata"><button data-icon="&#xe608;">Organization Analysis</button></a>
+        <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
+      </div>        
+    </div><!-- /col-3 -->
+	 <%- body %>
+  </div>
+</div>
 
 <!-- /Main -->
-	 <%- body %>
 	<!-- script references -->
-
-
 	</body>
 </html>
