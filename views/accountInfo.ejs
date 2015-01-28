@@ -12,17 +12,18 @@
 	<div class="col-sm-3">
       <!-- Left column -->
     <div class="left-side-btns">
-      <a href="/dashboard"><button>Account Information</button></a>
-      <a href="/"><button>Customer Analysis</button></a>
-      <a href="/"><button>Organization Analysis</button></a>
-      <a href="/logout"><button>Log Out</button></a>
-    </div>          
+      <a href="localhost:3000/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
+      <a href="localhost:3000/"><button data-icon="&#xe607;">Customer Analysis</button></a>
+      <a href="localhost:3000/"><button data-icon="&#xe608;">Organization Analysis</button></a>
+      <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
+    </div>
+
   </div><!-- /col-3 -->
 
 
     <div class="col-sm-9">
-      <div class="text-filler">    	
-      <!-- column 2 -->	
+      <div class="text-filler">
+      <!-- column 2 -->
       <a href="#">
       	<strong>
       		<div class="org-name">
@@ -31,11 +32,11 @@
 		      	</h1>
 		    </div>
       	</strong>
-      </a>     
+      </a>
 		    <div class="row">
-            <!-- center left-->	
-         	<div class="col-md-6">  
-              
+            <!-- center left-->
+         	<div class="col-md-6">
+
               <div class="org-panel">
                 <h4>Organization Information:</h4>
               </div>
@@ -45,14 +46,14 @@
                     	<p>EIN: <%= user.EIN %></p>
                     	<p>Address: <%= user.address.street + ' '+ user.address.zip %></p>
                     	<p>Website: <%= user.website %></p>
-                    	<p>Representative: 
+                    	<p>Representative:
                     		<ul>
                     			<li>Name: <%= user.representative.firstName + ' ' + user.representative.lastName %></li>
                     			<li>Date of Birthday: <%= user.representative.DOB.day + " " + user.representative.DOB.month + " " + user.representative.DOB.year %></li>
                     		</ul>
                     	</p>
                     	<p>Phone Number: <%= user.phone %></p>
-                    	
+
                     </div>
 
 
@@ -62,13 +63,13 @@
 
 
               <!--/panel-->
-	
+
               <div class="container">
                 <div class="col-md-4">
               	</div>
-              </div>  
-        
-   
+              </div>
+
+
           </div><!--/col-->
 
 
@@ -78,7 +79,7 @@
 
 
 
-              <div class="panel-heading"> 
+              <div class="panel-heading">
                 <!-- logic to display either a link to sync your stripe id or iframe tag depending if user has synced account-->
                 <% if (user.stripe_user_id === '') { %>
                 <a href="/users/authorize"><button class="connect-stripe">Click here to connect your strip account</button></a>
@@ -91,7 +92,7 @@
 
 
 
-          
+
               <table class="table">
                 <tbody>
                   <tr><td>45</td><td>2.45%</td><td>Direct</td></tr>
@@ -101,20 +102,20 @@
                   <tr><td>..</td><td>..</td><td>..</td></tr>
                 </tbody>
               </table>
-            
+
 
 
               	<div class="panel panel-default">
 
                 </div><!--/panel-->
-              
 
 
-              	
+
+
                   <div class="panel-heading">
-                   
+
                       <h4>Engagement</h4>
-                 
+
                  </div><!--/panel-->
 
 

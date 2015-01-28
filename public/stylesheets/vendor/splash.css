@@ -566,7 +566,7 @@ nav
     background: #f1f3f4;
     padding: 80px 0;}
 
-.page5 h1 {font-size:240px;}
+.page5 h1 {font-size:140px;}
 
 
 
@@ -649,7 +649,7 @@ pre {
 	border: 10px solid #f1F3F4; 
 	padding: 20px; 
 	color:#ecd565;
-}
+  height: 300px;}
 
 
 /* 12 MODAL SETTINGS ================================================= */
