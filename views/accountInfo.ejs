@@ -9,15 +9,14 @@
 <!-- Main -->
 <div class="container-fluid">
 <div class="row">
-	<div class="col-sm-3">
+  <div class="col-sm-3">
       <!-- Left column -->
     <div class="left-side-btns">
-      <a href="localhost:3000/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
-      <a href="localhost:3000/"><button data-icon="&#xe607;">Customer Analysis</button></a>
-      <a href="localhost:3000/"><button data-icon="&#xe608;">Organization Analysis</button></a>
+      <a href="/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
+      <a href="/graphs"><button data-icon="&#xe607;">Customer Analysis</button></a>
+      <a href="/orgdata"><button data-icon="&#xe608;">Organization Analysis</button></a>
       <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
-    </div>
-
+    </div>        
   </div><!-- /col-3 -->
 
 
@@ -65,8 +64,6 @@
 
         	<div class="col-md-6">
 
-
-
               <div class="panel-heading">
                 <!-- logic to display either a link to sync your stripe id or iframe tag depending if user has synced account-->
                 <% if (user.stripe_user_id === '') { %>
@@ -79,9 +76,6 @@
                 </div>
             	<%} %>
               </div>
-
-
-
 
           <!--/panel-->
 
