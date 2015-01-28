@@ -12,6 +12,8 @@ var qs = require('qs');
 // using request for HTTP client, similar to HTTParty
 var request = require('request');
 
+
+
 // GET homepage
 router.get('/', function(req, res) {
   var err = req.param('err')
@@ -34,6 +36,8 @@ router.get('/', function(req, res) {
     res.render('index', {error: err});
   }
 });
+
+
 
 // GET signup page
 router.get('/signup', function(req, res) {
@@ -58,11 +62,15 @@ router.get('/signup', function(req, res) {
   }
 });
 
+
+
 // logout and remove session id info
 router.get('/logout', function(req, res) {
   req.session.user_id = '';
   res.redirect('/');
 });
+
+
 
 // render the dashboard page
 router.get('/dashboard', function(req, res) {
@@ -86,38 +94,39 @@ router.get('/dashboard', function(req, res) {
 
 });
 
+
+
 // login an existing user
 router.post('/users/login', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
+  var errorMsg = 'Invalid email and password!'
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
-      res.redirect('/?err=' + err)
+      res.json({error: err})
     }
     else if (!user) {
-      var error = 'Invalid email and password!'
-      res.redirect('/?err=' + error)
+      res.json({error: errorMsg})
     }
     else {
       user.comparePassword(password, function(err, isMatch) {
         if (err) {
-          res.redirect('/?err=' + err)
+          res.json({error: err})
+        }
+        else if (isMatch) {
+          req.session.user_id = user._id
+          res.json({redirect: 'dashboard'})
         }
         else {
-          if (isMatch) {
-            req.session.user_id = user._id
-            res.redirect('/dashboard')
-          }
-          else {
-            var error = 'Invalid email and password!'
-            res.redirect('/?err=' + error)
-          }
+          res.json({error: errorMsg})
         }
       });
     }
   });
 });
+
+
 
 // create and login a new user
 router.post('/users', function(req, res) {
@@ -145,6 +154,8 @@ router.post('/users', function(req, res) {
   }
 });
 
+
+
 // authorize the user with stripe
 router.get('/users/authorize', function(req, res){
   res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
@@ -153,6 +164,8 @@ router.get('/users/authorize', function(req, res){
     client_id: client_id
   }));
 });
+
+
 
 // callback route after authorization
 router.get('/users/oath/callback', function(req, res){
@@ -199,6 +212,7 @@ router.get('/users/oath/callback', function(req, res){
   });
   });
 });
+
 
 
 // iframe stuff that can be linked on another website

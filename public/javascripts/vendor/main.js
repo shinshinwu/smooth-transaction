@@ -1,7 +1,7 @@
 /*
 
 	SHOWPAGE FREE TEMPLATE BY IAMSUPVIEW.BE
-	
+
 	01. Sticky Navbar
 	02. Modal + Pre Code
 	03. Smooth Scrolling
@@ -70,7 +70,7 @@ $('.login').on('click', function(e){
   $('.login-modal').modal({
     fadeDuration: 250,
     fadeDelay: 0.50
-  });  
+  });
 })
 
 $('.sign-up').on('click', function(e){
@@ -78,13 +78,32 @@ $('.sign-up').on('click', function(e){
   $('.sign-up-modal').modal({
     fadeDuration: 250,
     fadeDelay: 0.50
-  }); 
+  });
 })
+
+//append error message to modal for login
+$('#login').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize()
+    }).done(function(data){
+        var error = data.error
+        if (error) {
+            $('.error').text(error);
+        }
+        else if (data.redirect) {
+            console.log('redirect!')
+            window.location.href = data.redirect;
+        }
+    });
+});
 
 /*-----------------------------------------------------------------------------------*/
 /*	03. SMOOTH SCROLLING ON BUTTON
 /*-----------------------------------------------------------------------------------*/
-	
+
 
 $('.goto').on('click', function(e){
     e.preventDefault();
