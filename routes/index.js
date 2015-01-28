@@ -34,34 +34,11 @@ router.get('/', function(req, res) {
   }
   else {
     // if not logged in render signin page with any errors
-    res.render('index', {error: err});
+    res.render('index', {error: err, layout: 'splash'});
   }
 });
 
 
-
-// GET signup page
-router.get('/signup', function(req, res) {
-  var userId = req.session.user_id
-  var err = req.param('err')
-
-  if (userId) {
-    // if logged in, render dashboard page
-    getUser(userId,
-      // if error....
-      function(err) {
-        res.redirect('/signup?err=' + err);
-    },
-      // if successful
-      function(user) {
-        res.redirect('/dashboard')
-    });
-  }
-  else {
-    // if not logged in render signup page with any errors
-    res.render('signup', {error: err});
-  }
-});
 
 
 
@@ -246,7 +223,7 @@ router.get('/users/oath/callback', function(req, res){
 // iframe stuff that can be linked on another website
 
 router.get('/iframe', function(req, res) {
-  res.render('iframe')
+  res.render('iframe', {layout: 'splash'})
 });
 
 
@@ -273,7 +250,7 @@ router.post('/iframe', function(req, res) {
         metadata: {'email': email, 'zip_code': zip, "name": name}
       }, function(err, charge) {
         if (err && err.type === 'StripeCardError') {
-          res.render('error')
+          res.render('error', {error: err, layout: 'splash'})
         } else {
           // Send receipt for the transaction to their email...
           sendEmail(email, (chargeAmount*100));
@@ -290,13 +267,12 @@ router.post('/iframe', function(req, res) {
                     if (err){
                       res.send(err)
                     } else {
-                      res.render('success_oauth', {user: user})
+                      res.render('congrats', { charge: chargeAmount, layout: 'splash' });
                     };
                   });
                 }
               });
 
-          res.render('congrats', { charge: chargeAmount });
         }
 
       });
@@ -306,48 +282,6 @@ router.post('/iframe', function(req, res) {
 
 // A sample page that uses the iframe tag produced after Oauth
 
-router.get('/sampleorg', function(req, res) {
-  res.render('sampleOrg')
-});
-
-
-// --------- Routes to test D3 charts -----
-
-router.get('/geomap', function(req, res){
-  res.render('geomap')
-});
-
-// --------- Route to test customers card type pie chart -----
-
-router.get('/piechart', function(req, res){
-  res.render('piechart')
-});
-
-// --------- Route to test payment over year force graph -----
-
-router.get('/forcegraph', function(req, res){
-  res.render('forcegraph')
-});
-
-// --------- Route to test scatterplot over one year -----
-
-router.get('/scatterplot', function(req, res){
-  res.render('scatterplot')
-});
-
-router.get('/monthlytotals', function(req, res) {
-  res.render('monthly-totals')
-});
-
-router.get('/email', function(req, res){
-  res.render('email_testing')
-})
-
-// --------------------------------------------------------
-
-router.get('/userdata', function(req, res){
-  res.render('d3_customer_layout', {layout: 'dashboard'})
-});
 
 router.get('/graphs', function(req, res){
   res.render('graphs', {layout: 'dashboard'})
