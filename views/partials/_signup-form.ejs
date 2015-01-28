@@ -2,12 +2,19 @@
 
   <p class="signup-section">Organization Info</p>
 
-  <%- partial('partials/_input', {name: 'orgName', placeholder: 'Organization name'}) %>
-  <%- partial('partials/_input', {name: 'EIN', placeholder: 'EIN'}) %>
-  <%- partial('partials/_input', {name: 'website', placeholder: 'Website'}) %>
-  <%- partial('partials/_input', {name: 'address.street', placeholder: 'Street address'}) %>
-  <%- partial('partials/_input', {name: 'address.zip', placeholder: 'Zipcode'}) %>
-  <%- partial('partials/_input', {name: 'phone', placeholder: 'Phone number'}) %>
+  <div class="input-row">
+    <input type="text" placeholder="Organization name" name="orgName">
+    <input type="text" placeholder="EIN" name="EIN">
+    <input type="text" placeholder="Website" name="website">
+  </div>
+
+  <div class="input-row">
+    <input type="text" placeholder="Street address" name="address.street">
+    <input type="text" placeholder="Zipcode" name="address.zip">
+    <input type="text" placeholder="Phone number" name="phone">
+  </div>
+
+
 
   <p class="signup-section">Representaive Info</p>
 
