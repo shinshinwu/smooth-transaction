@@ -213,7 +213,6 @@ router.get('/users/oath/callback', function(req, res){
     if (err) {
     res.redirect('/dashboard')
     } else {
-      console.log("body", body)
       var stripeUserId = JSON.parse(body).stripe_user_id;
       var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
       var refreshToken = JSON.parse(body).refresh_token;
