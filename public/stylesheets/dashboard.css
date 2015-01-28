@@ -296,8 +296,12 @@ circle:hover {
 #info-box{
   position: absolute;
   width: 20%;
-  height: 30%;
+  height: 40%;
   background-color: rgba(0,0,0,0.5);
+
+  right: 5%;
+  bottom: 40%;
+  border-radius: 15px;
 }
 
 
