@@ -32,7 +32,7 @@
 
 html {
 width: 100%;
-height:;
+background-size: cover;
 background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/03/24/62691/ed094905bfae8348ff3142d71315c885.jpg);
 }
 
@@ -106,6 +106,8 @@ td {
  background-color: rgba(0,0,0,0.2);
 }
 
+
+
 .panel-heading {
     background-color: rgba(0,0,0,0.2);
 }
@@ -123,6 +125,7 @@ td {
  /*opacity: 0.2;*/
  background-color: rgba(0,0,0,0.2);
  margin-right: 1%;
+ margin-top: 1%;
 }
 
 .col-sm-3 {
