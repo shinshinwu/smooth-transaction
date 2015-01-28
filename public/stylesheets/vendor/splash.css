@@ -566,7 +566,7 @@ nav
     background: #f1f3f4;
     padding: 80px 0;}
 
-.page5 h1 {font-size:140px;}
+.page5 h1 {font-size:240px;}
 
 
 
@@ -704,6 +704,8 @@ h1 {font-size:30px;}
     width: 100%;
     height: auto;
 }
+
+.page5 h1 {font-size:60px;}
 
 }
 
