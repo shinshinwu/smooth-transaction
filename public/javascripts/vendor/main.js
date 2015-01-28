@@ -8,7 +8,6 @@
 	04. MediaCheck
 	05. Animations make-it-appear
 	06. Load the Whole Page
-
 */
 
 var ajax_form = true;
