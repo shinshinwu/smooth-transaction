@@ -1,6 +1,6 @@
 (function(){
   var margin = {top: 20, right: 20, bottom: 70, left: 40},
-      width = 600 - margin.left - margin.right,
+      width = 850 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
 
   // Parse the date / time
