@@ -140,7 +140,7 @@ router.post('/users', function(req, res) {
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
       if (err) {
-        console.log(err)
+        console.log(err.errors)
         res.json(err)
       }
       else {
@@ -186,7 +186,7 @@ router.get('/users/oath/callback', function(req, res){
   }, function(err, r, body){
 
     if (err)
-      res.send(err)
+      res.redirect('/dashboard')
 
     var stripeUserId = JSON.parse(body).stripe_user_id;
     var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
@@ -195,19 +195,14 @@ router.get('/users/oath/callback', function(req, res){
 
     User.findById(userId, function(err, user){
     if (err){
-      res.send(err)
+      res.redirect('/dashboard')
     } else {
       user.stripe_user_id = stripeUserId
       user.stripe_publishable_key = stripePublishableKey
       user.refresh_token = refreshToken
       user.access_token = accessToken
       user.save(function(err){
-        if (err){
-          res.send(err)
-        } else {
-          res.render('accountInfo', {user: user,
-                                     layout: 'dashboard'})
-        };
+        res.redirect('/dashboard')
       });
     }
   });

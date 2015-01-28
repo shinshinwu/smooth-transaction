@@ -109,9 +109,9 @@ function ajaxFormErrors(formId, nodeForErrors) {
 }
 
 function appendErrorsOrRedirect(data, nodeForErrors) {
-    var error = data.errors
+    var errors = data.errors
     var redirect = data.redirect
-    if (error) {
+    if (errors) {
         $(nodeForErrors).text(error);
     }
     else if (redirect) {
