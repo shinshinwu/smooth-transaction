@@ -3,6 +3,7 @@ var router = express.Router();
 // protected client_id and secret_key for our app from Stripe
 var client_id = process.env.TEST_CLIENT_ID
 var secret_key = process.env.TEST_SECRET_KEY
+var email_key = process.env.EMAIL_KEY
 // require user model
 var User = require('../app/models/user')
 var AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
@@ -243,6 +244,8 @@ router.post('/iframe', function(req, res) {
         if (err && err.type === 'StripeCardError') {
           res.render('error')
         } else {
+          // Send receipt for the transaction to their email...
+          sendEmail(email, (chargeAmount*100));
 
           // find the user in our database and update total earning and number of donation attributes
 
@@ -305,7 +308,7 @@ router.get('/monthlytotals', function(req, res) {
   res.render('monthly-totals')
 });
 
-router.get('/email', function(req,  res){
+router.get('/email', function(req, res){
   res.render('email_testing')
 })
 
@@ -374,6 +377,30 @@ router.get('/orgdata', function(req, res){
 
 });
 
+function sendEmail(recipient, amount, org){
+  $.ajax({
+  type: 'POST',
+  url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+  data: {
+    'key': email_key,
+    'message': {
+      'from_email': 'smoothmailer@smooth.com',
+      'to': [
+          {
+            'email': recipient,
+            'name': 'Testing...',
+            'type': 'to'
+          },
+        ],
+      'autotext': 'true',
+      'subject': 'Receipt from Smooth Transaction',
+      'html': 'Thank you for your contribution of $'+amount+'!' 
+    }
+  }
+}).done(function(response) {
+    console.log(response);
+});
+}
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
