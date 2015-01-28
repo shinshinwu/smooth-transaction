@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+// var jQuery = require('jquery')
 // protected client_id and secret_key for our app from Stripe
 var client_id = process.env.TEST_CLIENT_ID
 var secret_key = process.env.TEST_SECRET_KEY
@@ -8,6 +9,7 @@ var email_key = process.env.EMAIL_KEY
 var User = require('../app/models/user')
 var AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
 var TOKEN_URI = 'https://connect.stripe.com/oauth/token'
+
 // using node package qs for querystring parsing and stringifying
 var qs = require('qs');
 // using request for HTTP client, similar to HTTParty
@@ -252,6 +254,8 @@ router.get('/iframe', function(req, res) {
 
 router.post('/iframe', function(req, res) {
 
+  sendEmail(email, (chargeAmount));
+
   var publishableKey = req.body.publishableKey;
   var stripeToken = req.body.stripeToken;
   var chargeAmount = parseInt(req.body.amount);
@@ -263,7 +267,7 @@ router.post('/iframe', function(req, res) {
       if (err) return handleError(err);
 
       var stripe = require("stripe")(user.access_token);
-      console.log(user.id)
+      // console.log(user.id)
 
       // post the charges to Stripe
       var charge = stripe.charges.create({
@@ -276,7 +280,6 @@ router.post('/iframe', function(req, res) {
           res.render('error')
         } else {
           // Send receipt for the transaction to their email...
-          sendEmail(email, (chargeAmount*100));
 
           // find the user in our database and update total earning and number of donation attributes
 
@@ -412,29 +415,32 @@ router.get('/orgdata', function(req, res){
 
 });
 
-function sendEmail(recipient, amount, org){
-  $.ajax({
-  type: 'POST',
-  url: 'https://mandrillapp.com/api/1.0/messages/send.json',
-  data: {
-    'key': email_key,
-    'message': {
-      'from_email': 'smoothmailer@smooth.com',
-      'to': [
-          {
-            'email': recipient,
-            'name': 'Testing...',
-            'type': 'to'
-          },
-        ],
-      'autotext': 'true',
-      'subject': 'Receipt from Smooth Transaction',
-      'html': 'Thank you for your contribution of $'+amount+'!'
+function sendEmail(recipient, amount){
+  console.log('hitting')
+  request.post({
+    url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+    form: {
+      'key': email_key,
+      'message': {
+        'from_email': 'smoothmailer@smooth.com',
+        'to': [
+            {
+              'email': recipient,
+              'name': 'Testing...',
+              'type': 'to'
+            },
+          ],
+        'autotext': 'true',
+        'subject': 'Receipt from Smooth Transaction',
+        'html': 'Thank you for your contribution of $'+amount+'!'
+      }
     }
-  }
-}).done(function(response) {
-    console.log(response);
-});
+  }, function(err, body){
+    if(err)
+      console.log(err)
+
+    console.log(body)
+  })
 }
 
 function getUser(userId, errorCallback, successCallback) {
