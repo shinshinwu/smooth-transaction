@@ -104,22 +104,22 @@ router.post('/users/login', function(req, res) {
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
-      res.json({error: err})
+      res.json({errors: err})
     }
     else if (!user) {
-      res.json({error: errorMsg})
+      res.json({errors: errorMsg})
     }
     else {
       user.comparePassword(password, function(err, isMatch) {
         if (err) {
-          res.json({error: err})
+          res.json({errors: err})
         }
         else if (isMatch) {
           req.session.user_id = user._id
           res.json({redirect: 'dashboard'})
         }
         else {
-          res.json({error: errorMsg})
+          res.json({errors: errorMsg})
         }
       });
     }
@@ -135,22 +135,23 @@ router.post('/users', function(req, res) {
 
   if (password.length < 8) {
     err = "Password must be at least 8 characters"
-    res.redirect('/signup?err=' + err)
+    res.json({errors: err})
   }
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
       if (err) {
-        res.redirect('/signup?err=' + err)
+        console.log(err)
+        res.json(err)
       }
       else {
         req.session.user_id = user._id
-        res.redirect('/')
+        res.json({redirect: 'dashboard'})
       }
     });
   }
   else {
     err = "Passwords do not match!"
-    res.redirect('/signup?err=' + err)
+    res.json({errors: err})
   }
 });
 

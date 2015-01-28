@@ -109,7 +109,7 @@ function ajaxFormErrors(formId, nodeForErrors) {
 }
 
 function appendErrorsOrRedirect(data, nodeForErrors) {
-    var error = data.error
+    var error = data.errors
     var redirect = data.redirect
     if (error) {
         $(nodeForErrors).text(error);
