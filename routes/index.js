@@ -160,11 +160,35 @@ router.post('/users', function(req, res) {
 
 // authorize the user with stripe
 router.get('/users/authorize', function(req, res){
-  res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
-    response_type: 'code',
-    scope: 'read_write',
-    client_id: client_id
-  }));
+  var userId = req.session.user_id
+  var user = {};
+
+  User.findById(userId, function(err, user){
+    if (err){
+      res.redirect('/')
+    } else {
+      user = user;
+      res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
+        client_id: client_id,
+        response_type: 'code',
+        scope: 'read_write',
+        stripe_landing: "login",
+        "stripe_user[email]": user.email,
+        "stripe_user[url]": user.website,
+        "stripe_user[country]": "US",
+        "stripe_user[phone_number]": user.phone,
+        "stripe_user[business_name": user.orgName,
+        "stripe_user[business_type]": "non_profit",
+        "stripe_user[street_address]": user.address.street,
+        "stripe_user[zip]": user.address.zip,
+        "stripe_user[physical_product]": "false",
+        "stripe_user[product_category]": "charity",
+        "stripe_user[currency]": "usd"
+      }));
+    }
+  });
+
+
 });
 
 
@@ -394,7 +418,7 @@ function sendEmail(recipient, amount, org){
         ],
       'autotext': 'true',
       'subject': 'Receipt from Smooth Transaction',
-      'html': 'Thank you for your contribution of $'+amount+'!' 
+      'html': 'Thank you for your contribution of $'+amount+'!'
     }
   }
 }).done(function(response) {
