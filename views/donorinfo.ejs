@@ -13,32 +13,25 @@
       <!-- Left column -->
     <div class="left-side-btns">
       <a href="localhost:3000/dashboard"><button>Account Information</button></a>
-      <a href="localhost:3000/"><button>Customer Analysis</button></a>
+      <a href="localhost:3000/donorinfo"><button>Customer Analysis</button></a>
       <a href="localhost:3000/"><button>Organization Analysis</button></a>
       <a href="/logout"><button>Log Out</button></a>
     </div>          
   </div><!-- /col-3 -->
 
 <div class='customer-data'>  
+  <div id='piechart'>
+    <%- partial('views/piechart') %>
+  </div>
+  <div id='geomap'>
+    <%- partial('views/geomap') %>
+  </div>
+
   <div id='scatterplot'>
     <%- partial('views/scatterplot') %>
   </div>
 
-  <div id='piechart'>
-    <%- partial('views/piechart') %>
-  </div>
-
-  <div id='geomap'>
-    <%- partial('views/geomap') %>
-  </div>
 </div>
-  
-
-
-
-
-
-
 
 
   
