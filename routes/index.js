@@ -102,13 +102,14 @@ router.post('/users/login', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
   var errorMsg = 'Invalid email and password!'
+  var customErr = { "invalid": { message: errorMsg } }
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
       res.json({errors: err})
     }
     else if (!user) {
-      res.json({errors: errorMsg})
+      res.json({errors: customErr});
     }
     else {
       user.comparePassword(password, function(err, isMatch) {
@@ -120,7 +121,7 @@ router.post('/users/login', function(req, res) {
           res.json({redirect: 'dashboard'})
         }
         else {
-          res.json({errors: errorMsg})
+          res.json({errors: customErr});
         }
       });
     }
@@ -132,11 +133,16 @@ router.post('/users/login', function(req, res) {
 // create and login a new user
 router.post('/users', function(req, res) {
   var password = req.param('password');
+  console.log(password)
   var passwordVerify = req.param('passwordVerify');
+  var passLengthErr = { "invalid": { message: 'Password must be at least 8 characters' } }
+  var passMatchErr = { "invalid": { message: 'Passwords do not match' } }
 
-  if (password.length < 8) {
-    err = "Password must be at least 8 characters"
-    res.json({errors: err})
+  if (!password) {
+    res.json({errors: passLengthErr})
+  }
+  else if (password.length < 8) {
+    res.json({errors: passLengthErr})
   }
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
@@ -151,8 +157,7 @@ router.post('/users', function(req, res) {
     });
   }
   else {
-    err = "Passwords do not match!"
-    res.json({errors: err})
+    res.json({errors: passMatchErr})
   }
 });
 
@@ -160,11 +165,35 @@ router.post('/users', function(req, res) {
 
 // authorize the user with stripe
 router.get('/users/authorize', function(req, res){
-  res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
-    response_type: 'code',
-    scope: 'read_write',
-    client_id: client_id
-  }));
+  var userId = req.session.user_id
+  var user = {};
+
+  User.findById(userId, function(err, user){
+    if (err){
+      res.redirect('/')
+    } else {
+      user = user;
+      res.redirect(AUTHORIZE_URI + '?' + qs.stringify({
+        client_id: client_id,
+        response_type: 'code',
+        scope: 'read_write',
+        stripe_landing: "login",
+        "stripe_user[email]": user.email,
+        "stripe_user[url]": user.website,
+        "stripe_user[country]": "US",
+        "stripe_user[phone_number]": user.phone,
+        "stripe_user[business_name": user.orgName,
+        "stripe_user[business_type]": "non_profit",
+        "stripe_user[street_address]": user.address.street,
+        "stripe_user[zip]": user.address.zip,
+        "stripe_user[physical_product]": "false",
+        "stripe_user[product_category]": "charity",
+        "stripe_user[currency]": "usd"
+      }));
+    }
+  });
+
+
 });
 
 
@@ -186,27 +215,29 @@ router.get('/users/oath/callback', function(req, res){
     }
   }, function(err, r, body){
 
-    if (err)
-      res.redirect('/dashboard')
-
-    var stripeUserId = JSON.parse(body).stripe_user_id;
-    var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
-    var refreshToken = JSON.parse(body).refresh_token;
-    var accessToken = JSON.parse(body).access_token;
-
-    User.findById(userId, function(err, user){
-    if (err){
-      res.redirect('/dashboard')
+    if (err) {
+    res.redirect('/dashboard')
     } else {
-      user.stripe_user_id = stripeUserId
-      user.stripe_publishable_key = stripePublishableKey
-      user.refresh_token = refreshToken
-      user.access_token = accessToken
-      user.save(function(err){
+      var stripeUserId = JSON.parse(body).stripe_user_id;
+      var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
+      var refreshToken = JSON.parse(body).refresh_token;
+      var accessToken = JSON.parse(body).access_token;
+
+      User.findById(userId, function(err, user){
+      if (err){
         res.redirect('/dashboard')
+      } else {
+          user.stripe_user_id = stripeUserId
+          user.stripe_publishable_key = stripePublishableKey
+          user.refresh_token = refreshToken
+          user.access_token = accessToken
+          user.save(function(err){
+            res.redirect('/dashboard')
+          });
+        }
       });
     }
-  });
+
   });
 });
 
@@ -398,7 +429,7 @@ function sendEmail(recipient, amount, org){
         ],
       'autotext': 'true',
       'subject': 'Receipt from Smooth Transaction',
-      'html': 'Thank you for your contribution of $'+amount+'!' 
+      'html': 'Thank you for your contribution of $'+amount+'!'
     }
   }
 }).done(function(response) {
