@@ -287,6 +287,10 @@ router.get('/graphs', function(req, res){
   res.render('graphs', {layout: 'dashboard'})
 });
 
+router.get('/burritoscape', function(req, res){
+  res.render('burritoscape')
+})
+
 // Need to write logic to update earnings live
 router.get('/orgdata', function(req, res){
 
