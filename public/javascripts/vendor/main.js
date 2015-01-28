@@ -81,25 +81,45 @@ $('.sign-up').on('click', function(e){
   });
 })
 
+
+
+
 //append error message to modal for login
 //otherwise redirect to dashboard
-$('#login').on('submit', function(e) {
-    e.preventDefault();
+
+
+bindFormActions('#login', '.login-modal .error')
+bindFormActions('#signup', '.sign-up-modal .error')
+
+
+function appendErrorsOrRedirect(data, nodeForErrors) {
+    var error = data.error
+    var redirect = data.redirect
+    if (error) {
+        $(nodeForErrors).text(error);
+    }
+    else if (redirect) {
+        window.location.href = redirect;
+    }
+}
+
+function ajaxFormErrors(formId, nodeForErrors) {
     $.ajax({
         type: 'POST',
-        url: $(this).attr('action'),
-        data: $(this).serialize()
+        url: $(formId).attr('action'),
+        data: $(formId).serialize()
     }).done(function(data){
-        var error = data.error
-        var redirect = data.redirect
-        if (error) {
-            $('.error').text(error);
-        }
-        else if (redirect) {
-            window.location.href = redirect;
-        }
+        appendErrorsOrRedirect(data, nodeForErrors);
     });
-});
+}
+
+function bindFormActions(formId, nodeForErrors) {
+    $(formId).on('submit', function(e) {
+        e.preventDefault();
+        ajaxFormErrors(formId, nodeForErrors);
+    });
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /*	03. SMOOTH SCROLLING ON BUTTON
