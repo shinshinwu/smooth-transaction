@@ -78,8 +78,8 @@ svg.append('g')
 	.attr('fill', '#274AB3')
 	.on('mouseover', function(d){
 		console.log(d[1])
-		// $('.scatterplot-data-display').style('visibility', 'visible')
-		$('.scatterplot-data-display').html(d[1])
+		$('.scatterplot-data-display').css('visibility', 'visible')
+		$('.scatterplot-data-display').html('$'+d[1])
 
 		// var xPosition = parseFloat(d3.select(this).attr("cx"))
 		// var yPosition = parseFloat(d3.select(this).attr("cy"))
@@ -94,7 +94,7 @@ svg.append('g')
 		// d3.select('#scatter-tooltip').classed('hidden', false)
 	})
 	.on('mouseout', function(){
-		// $('.scatterplot-data-display').style('visibility', 'hidden')
+		$('.scatterplot-data-display').css('visibility', 'hidden')
 	})
 	.attr('cx', function(d){
 		return xScale(d[0]);
