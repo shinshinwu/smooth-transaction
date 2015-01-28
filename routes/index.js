@@ -34,34 +34,13 @@ router.get('/', function(req, res) {
   }
   else {
     // if not logged in render signin page with any errors
-    res.render('index', {error: err});
+    res.render('index', {error: err, layout: 'splash'});
   }
 });
 
 
 
-// GET signup page
-router.get('/signup', function(req, res) {
-  var userId = req.session.user_id
-  var err = req.param('err')
 
-  if (userId) {
-    // if logged in, render dashboard page
-    getUser(userId,
-      // if error....
-      function(err) {
-        res.redirect('/signup?err=' + err);
-    },
-      // if successful
-      function(user) {
-        res.redirect('/dashboard')
-    });
-  }
-  else {
-    // if not logged in render signup page with any errors
-    res.render('signup', {error: err});
-  }
-});
 
 
 
