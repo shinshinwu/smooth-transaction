@@ -1,4 +1,4 @@
-var w = 900;
+var w = 1640;
 var h = 300;
 var padding = 30
 
@@ -10,31 +10,12 @@ var randomDay = function(){
 	return Math.floor(Math.random() * (365 - 1 + 1)) + 1
 }
 
-console.log(randomAmount())
-console.log(randomDay())
-
 dataset = []
 
-for (i = 0; i < 200; i++) { 
+for (i = 0; i < 1000; i++) { 
     var set = [randomAmount(), randomDay()]
-    console.log(set)
     dataset.push(set)
 }
-
-// dataset = [
-// 	['January', 43],
-// 	['February', 89],
-// 	['March', 38],
-// 	['April', 90],
-// 	['May', 23],
-// 	['June', 10],
-// 	['July', 68],
-// 	['August', 50],
-// 	['September', 45],
-// 	['October', 55],
-// 	['November', 58],
-// 	['December', 100]
-// ]
 
 var january = d3.time.scale()    
 	.domain([new Date(2012, 0, 1), new Date(2012, 0, 31)])
@@ -68,11 +49,6 @@ var rScale = d3.scale.linear()
 
 // Axes
 
-// var xAxis = d3.svg.axis()
-// 	.scale(xScale)
-// 	.orient('bottom')
-// 	.ticks(12)
-
 var xAxis = d3.svg.axis()
   .scale(x)
   .orient("bottom")
@@ -101,20 +77,24 @@ svg.append('g')
 	.append("circle")
 	.attr('fill', '#274AB3')
 	.on('mouseover', function(d){
-		var xPosition = parseFloat(d3.select(this).attr("cx"))
-		var yPosition = parseFloat(d3.select(this).attr("cy"))
+		console.log(d[1])
+		// $('.scatterplot-data-display').style('visibility', 'visible')
+		$('.scatterplot-data-display').html(d[1])
 
-		d3.select('#scatter-tooltip')
-			.style('left', xPosition + 'px')
-			.style("left", xPosition + "px")
-		  .style("top", yPosition + "px")
-		  .select("#value")
-		  .text(d[1]);
+		// var xPosition = parseFloat(d3.select(this).attr("cx"))
+		// var yPosition = parseFloat(d3.select(this).attr("cy"))
 
-		d3.select('#scatter-tooltip').classed('hidden', false)
+		// d3.select('#scatter-tooltip')
+		// 	.style('left', xPosition + 'px')
+		// 	.style("left", xPosition + "px")
+		//   .style("top", yPosition + "px")
+		//   .select("#value")
+		//   .text(d[1]);
+
+		// d3.select('#scatter-tooltip').classed('hidden', false)
 	})
 	.on('mouseout', function(){
-		d3.select('#scatter-tooltip').classed('hidden', true)
+		// $('.scatterplot-data-display').style('visibility', 'hidden')
 	})
 	.attr('cx', function(d){
 		return xScale(d[0]);
@@ -140,8 +120,9 @@ svg.append("g")
 	.attr("transform", "translate(" + padding + ",0)")
 	.call(yAxis);
 
-d3.select("p")
+d3.select("button")
 .on("click", function() {
+	console.log('clicking')
 
 	//New values for dataset
 	var numValues = dataset.length;						 		//Count original length of dataset

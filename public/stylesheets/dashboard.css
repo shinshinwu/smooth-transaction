@@ -218,11 +218,23 @@ circle:hover {
   background-color: rgba(255,255,255,0.2);
   border-radius: 15px;
 }
+
+#geomap-container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 #customerMap{
-  position: relative;
-  height: 90%;
-  top:10%;
-  right: 5%;
+  min-height: 100%;
+  width:80%;
+  left: -5%;
+}
+
+#customerMap .datamap{
+  position:;
+  min-height: 400px;
+  min-width: 100%;
 }
 
 #geomap #title{
@@ -244,7 +256,22 @@ circle:hover {
 
 
 #scatterplot{
+  position: absolute;
+  bottom: 5%;
+  left: 3%;
+  background-color: rgba(255,255,255,0.2);
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
 
+.scatterplot-data-display{
+  position: absolute;
+  top: -10%;
+  width:10%;
+  height:10%;
+  background-color: rgba(255,255,255,0.2);
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 }
 
 #orgAnalysis #balance {
