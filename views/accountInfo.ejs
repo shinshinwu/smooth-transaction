@@ -75,7 +75,6 @@
 
 
         	<div class="col-md-6">
-				    <div class="panel panel-default">
 
 
 
@@ -84,18 +83,16 @@
                 <% if (user.stripe_user_id === '') { %>
                 <a href="/users/authorize"><button class="connect-stripe">Click here to connect your strip account</button></a>
             	<% } else { %>
-            		<h4>iFrame Tag</h4>
+                <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
+                <hr>
+            		<xmp><iframe src="http://localhost:3000/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
             	<%} %>
-
-
-
               </div>
-            </div>
 
-              <table class="table table-striped">
-                <thead>
-                  Table
-                </thead>
+
+
+          
+              <table class="table">
                 <tbody>
                   <tr><td>45</td><td>2.45%</td><td>Direct</td></tr>
                   <tr><td>289</td><td>56.2%</td><td>Referral</td></tr>
@@ -108,19 +105,17 @@
 
 
               	<div class="panel panel-default">
-                	<div class="panel-body">
-                  </div><!--/panel content-->
+
                 </div><!--/panel-->
               
 
 
-              	<div class="panel panel-default">
+              	
                   <div class="panel-heading">
-                    <div class="panel-title">
+                   
                       <h4>Engagement</h4>
-                    </div>
-                  </div>  
-               </div><!--/panel-->
+                 
+                 </div><!--/panel-->
 
 
 			    </div><!--/col-span-6-->
