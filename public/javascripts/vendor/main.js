@@ -82,6 +82,7 @@ $('.sign-up').on('click', function(e){
 })
 
 //append error message to modal for login
+//otherwise redirect to dashboard
 $('#login').on('submit', function(e) {
     e.preventDefault();
     $.ajax({
@@ -90,12 +91,12 @@ $('#login').on('submit', function(e) {
         data: $(this).serialize()
     }).done(function(data){
         var error = data.error
+        var redirect = data.redirect
         if (error) {
             $('.error').text(error);
         }
-        else if (data.redirect) {
-            console.log('redirect!')
-            window.location.href = data.redirect;
+        else if (redirect) {
+            window.location.href = redirect;
         }
     });
 });
