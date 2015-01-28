@@ -84,13 +84,23 @@ $('.sign-up').on('click', function(e){
 /*-----------------------------------------------------------------------------------*/
 /*	03. SMOOTH SCROLLING ON BUTTON
 /*-----------------------------------------------------------------------------------*/
-	
+
+$("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(){
+       $('html, body').stop();
+   });
 
 $('.goto').on('click', function(e){
     e.preventDefault();
     var scrollToPage2 = $('.page1').height();
-    $('body').animate({scrollTop: scrollToPage2}, 1500)
+    $('body').animate({scrollTop: scrollToPage2}, 1000, function(){
+        $("html, body").unbind("scroll mousedown DOMMouseScroll mousewheel keyup");
+    })
+    $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(){
+       $('html, body').stop();
+   });
 });
+
+
 
 
 /*-----------------------------------------------------------------------------------*/
