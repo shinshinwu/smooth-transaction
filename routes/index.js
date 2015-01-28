@@ -12,6 +12,8 @@ var qs = require('qs');
 // using request for HTTP client, similar to HTTParty
 var request = require('request');
 
+
+
 // GET homepage
 router.get('/', function(req, res) {
   var err = req.param('err')
@@ -34,6 +36,8 @@ router.get('/', function(req, res) {
     res.render('index', {error: err});
   }
 });
+
+
 
 // GET signup page
 router.get('/signup', function(req, res) {
@@ -58,11 +62,15 @@ router.get('/signup', function(req, res) {
   }
 });
 
+
+
 // logout and remove session id info
 router.get('/logout', function(req, res) {
   req.session.user_id = '';
   res.redirect('/');
 });
+
+
 
 // render the dashboard page
 router.get('/dashboard', function(req, res) {
@@ -86,38 +94,39 @@ router.get('/dashboard', function(req, res) {
 
 });
 
+
+
 // login an existing user
 router.post('/users/login', function(req, res) {
   var email = req.param('email');
   var password = req.param('password');
+  var errorMsg = 'Invalid email and password!'
 
   User.findOne({ 'email': email }, function(err, user) {
     if (err) {
-      res.redirect('/?err=' + err)
+      res.json({errors: err})
     }
     else if (!user) {
-      var error = 'Invalid email and password!'
-      res.redirect('/?err=' + error)
+      res.json({errors: errorMsg})
     }
     else {
       user.comparePassword(password, function(err, isMatch) {
         if (err) {
-          res.redirect('/?err=' + err)
+          res.json({errors: err})
+        }
+        else if (isMatch) {
+          req.session.user_id = user._id
+          res.json({redirect: 'dashboard'})
         }
         else {
-          if (isMatch) {
-            req.session.user_id = user._id
-            res.redirect('/dashboard')
-          }
-          else {
-            var error = 'Invalid email and password!'
-            res.redirect('/?err=' + error)
-          }
+          res.json({errors: errorMsg})
         }
       });
     }
   });
 });
+
+
 
 // create and login a new user
 router.post('/users', function(req, res) {
@@ -126,24 +135,27 @@ router.post('/users', function(req, res) {
 
   if (password.length < 8) {
     err = "Password must be at least 8 characters"
-    res.redirect('/signup?err=' + err)
+    res.json({errors: err})
   }
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
       if (err) {
-        res.redirect('/signup?err=' + err)
+        console.log(err.errors)
+        res.json(err)
       }
       else {
         req.session.user_id = user._id
-        res.redirect('/')
+        res.json({redirect: 'dashboard'})
       }
     });
   }
   else {
     err = "Passwords do not match!"
-    res.redirect('/signup?err=' + err)
+    res.json({errors: err})
   }
 });
+
+
 
 // authorize the user with stripe
 router.get('/users/authorize', function(req, res){
@@ -153,6 +165,8 @@ router.get('/users/authorize', function(req, res){
     client_id: client_id
   }));
 });
+
+
 
 // callback route after authorization
 router.get('/users/oath/callback', function(req, res){
@@ -172,7 +186,7 @@ router.get('/users/oath/callback', function(req, res){
   }, function(err, r, body){
 
     if (err)
-      res.send(err)
+      res.redirect('/dashboard')
 
     var stripeUserId = JSON.parse(body).stripe_user_id;
     var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
@@ -181,24 +195,20 @@ router.get('/users/oath/callback', function(req, res){
 
     User.findById(userId, function(err, user){
     if (err){
-      res.send(err)
+      res.redirect('/dashboard')
     } else {
       user.stripe_user_id = stripeUserId
       user.stripe_publishable_key = stripePublishableKey
       user.refresh_token = refreshToken
       user.access_token = accessToken
       user.save(function(err){
-        if (err){
-          res.send(err)
-        } else {
-          res.render('accountInfo', {user: user,
-                                     layout: 'dashboard'})
-        };
+        res.redirect('/dashboard')
       });
     }
   });
   });
 });
+
 
 
 // iframe stuff that can be linked on another website

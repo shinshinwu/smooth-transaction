@@ -1,7 +1,7 @@
 /*
 
 	SHOWPAGE FREE TEMPLATE BY IAMSUPVIEW.BE
-	
+
 	01. Sticky Navbar
 	02. Modal + Pre Code
 	03. Smooth Scrolling
@@ -70,7 +70,7 @@ $('.login').on('click', function(e){
   $('.login-modal').modal({
     fadeDuration: 250,
     fadeDelay: 0.50
-  });  
+  });
 })
 
 $('.sign-up').on('click', function(e){
@@ -78,16 +78,59 @@ $('.sign-up').on('click', function(e){
   $('.sign-up-modal').modal({
     fadeDuration: 250,
     fadeDelay: 0.50
-  }); 
+  });
 })
+
+
+
+
+//append error message to modal for login and signup forms
+//otherwise redirect to dashboard
+
+
+bindFormActions('#login', '.login-modal .error')
+bindFormActions('#signup', '.sign-up-modal .error')
+
+function bindFormActions(formId, nodeForErrors) {
+    $(formId).on('submit', function(e) {
+        e.preventDefault();
+        ajaxFormErrors(formId, nodeForErrors);
+    });
+}
+
+function ajaxFormErrors(formId, nodeForErrors) {
+    $.ajax({
+        type: 'POST',
+        url: $(formId).attr('action'),
+        data: $(formId).serialize()
+    }).done(function(data){
+        appendErrorsOrRedirect(data, nodeForErrors);
+    });
+}
+
+function appendErrorsOrRedirect(data, nodeForErrors) {
+    var errors = data.errors
+    var redirect = data.redirect
+    if (errors) {
+        $(nodeForErrors).text(errors);
+    }
+    else if (redirect) {
+        window.location.href = redirect;
+    }
+}
+
+
+
 
 /*-----------------------------------------------------------------------------------*/
 /*	03. SMOOTH SCROLLING ON BUTTON
 /*-----------------------------------------------------------------------------------*/
 
+
 $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(){
        $('html, body').stop();
    });
+
 
 $('.goto').on('click', function(e){
     e.preventDefault();
