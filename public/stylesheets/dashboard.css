@@ -33,6 +33,7 @@
 html {
 width: 100%;
 height:;
+background-size: 100%;
 background-image: url(http://www.wallpaperup.com/uploads/wallpapers/2013/03/24/62691/ed094905bfae8348ff3142d71315c885.jpg);
 }
 
@@ -288,6 +289,15 @@ circle:hover {
   width: 20%;
   bottom: 5%;
   right: 5%;
+}
+
+/*Scatterplot*/
+
+#info-box{
+  position: absolute;
+  width: 20%;
+  height: 30%;
+  background-color: rgba(0,0,0,0.5);
 }
 
 
