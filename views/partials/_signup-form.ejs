@@ -15,20 +15,19 @@
   </div>
 
 
-
   <p class="signup-section">Representaive Info</p>
 
-  <%- partial('partials/_input', {name: 'representative.firstName', placeholder: 'First name'}) %>
-  <%- partial('partials/_input', {name: 'representative.lastName', placeholder: 'Last name'}) %>
-  <p>Date of Birth:</p>
-
   <div class="input-row">
+    <input type="text" placeholder="First name" name="representative.firstName">
     <input class="birthday" type="text" name="representative.DOB.month" placeholder="Month">
     <input class="birthday" type="text" name="representative.DOB.day" placeholder="Day">
     <input class="birthday" type="text" name="representative.DOB.year" placeholder="Year">
   </div>
 
-  <%- partial('partials/_input', {name: 'representative.SSN', placeholder: 'SSN (last four digits)'}) %>
+  <div class="input-row">
+    <input type="text" placeholder="Last name" name="respresentative.lastName">
+    <input type="text" placeholder="SSN (last four digits)" name="representative.SSN">
+  </div>
 
   <p class="signup-section">Login Info</p>
 
