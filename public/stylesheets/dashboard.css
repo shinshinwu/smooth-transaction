@@ -248,18 +248,31 @@ circle:hover {
 }
 
 .orgAnalysis {
-  width: 100%;
+  width: 90%;
   height: 800px;
+  margin: 0 auto;
+  padding: 5%;
 }
 
 .orgAnalysis #barchart {
   display: block;
+  margin: 0 auto;
 }
 
-.orgAnalysis #balance {
-  background-color: #D9544F;
-  width: 35%;
+.orgAnalysis .donation-analysis {
+  width: 30%;
   height: 15%;
+  text-align: center;
+  vertical-align: top;
+  margin-bottom: 5%;
   border-radius: 15px;
   opacity: 0.9;
+}
+
+.orgAnalysis .donation-analysis #earning-today {
+  background-color: #D9544F;
+}
+
+.orgAnalysis .donation-analysis #earning-today {
+  background-color: #1F77B4;
 }
