@@ -305,6 +305,10 @@ router.get('/monthlytotals', function(req, res) {
   res.render('monthly-totals')
 });
 
+router.get('/email', function(req,  res){
+  res.render('email_testing')
+})
+
 // --------------------------------------------------------
 
 router.get('/userdata', function(req, res){
