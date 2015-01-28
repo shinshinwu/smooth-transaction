@@ -286,7 +286,63 @@ circle:hover {
   text-align: center;
 }
 
-#orgAnalysis #balance {
-  color: #D62728;
+.orgAnalysis {
+  width: 90%;
+  height: 800px;
+  margin: 0 auto;
+  padding: 5%;
+}
 
+.orgAnalysis h3 {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.orgAnalysis #barchart {
+  display: block;
+  margin: 0 auto;
+  margin-left: 20%;
+}
+
+.orgAnalysis .donation-analysis {
+  display: inline-block;
+  width: 30%;
+  height: 15%;
+  text-align: center;
+  vertical-align: top;
+  margin-bottom: 5%;
+  margin-left: 2.5%;
+  padding-top: 1%;
+  border-radius: 20px;
+  opacity: 0.9;
+  font-size: 2em;
+}
+
+.orgAnalysis #earning-today {
+  background-color: #D9544F;
+}
+
+.orgAnalysis #earning-today {
+ background-color: #1F77B4;
+}
+
+.orgAnalysis #earning-month {
+  background-color: #FF7F0E;
+}
+
+.orgAnalysis #balance {
+  background-color: #2CA02C;
+}
+
+.orgAnalysis #total-earnings {
+  background-color: #E377C2;
+}
+
+.orgAnalysis #total-donations {
+  background-color: #8C564B;
+}
+
+.orgAnalysis #avg-donations {
+  background-color: #17BECF;
 }
