@@ -17,19 +17,111 @@
       <a href="localhost:3000/"><button data-icon="&#xe608;">Organization Analysis</button></a>
       <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
     </div>
+
   </div><!-- /col-3 -->
 
-      <div id='scatterplot'>
-        <%- partial('views/scatterplot') %>
-      </div>
 
-      <div id='piechart'>
-        <%- partial('views/piechart') %>
-      </div>
+    <div class="col-sm-9">
+      <div class="text-filler">
+      <!-- column 2 -->
+      <a href="#">
+      	<strong>
+      		<div class="org-name">
+		      	<h1>
+		      		<%= user.orgName %>
+		      	</h1>
+		    </div>
+      	</strong>
+      </a>
+		    <div class="row">
+            <!-- center left-->
+         	<div class="col-md-6">
 
-      <div id='geomap'>
-        <%- partial('views/geomap') %>
+              <div class="org-panel">
+                <h4>Organization Information:</h4>
+              </div>
+                    <div class="org-info">
+                    	<p>Email: <%= user.email %></p>
+                    	<p>Encrypted Passowrd: <%= user.password %></p>
+                    	<p>EIN: <%= user.EIN %></p>
+                    	<p>Address: <%= user.address.street + ' '+ user.address.zip %></p>
+                    	<p>Website: <%= user.website %></p>
+                    	<p>Representative:
+                    		<ul>
+                    			<li>Name: <%= user.representative.firstName + ' ' + user.representative.lastName %></li>
+                    			<li>Date of Birthday: <%= user.representative.DOB.day + " " + user.representative.DOB.month + " " + user.representative.DOB.year %></li>
+                    		</ul>
+                    	</p>
+                    	<p>Phone Number: <%= user.phone %></p>
+
+                    </div>
+
+
+
+
+
+
+
+              <!--/panel-->
+
+              <div class="container">
+                <div class="col-md-4">
+              	</div>
+              </div>
+
+
+          </div><!--/col-->
+
+
+
+
+        	<div class="col-md-6">
+
+
+
+              <div class="panel-heading">
+                <!-- logic to display either a link to sync your stripe id or iframe tag depending if user has synced account-->
+                <% if (user.stripe_user_id === '') { %>
+                <a href="/users/authorize"><button class="connect-stripe">Click here to connect your strip account</button></a>
+            	<% } else { %>
+                <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
+                <hr>
+            		<xmp><iframe src="https://smooth-transaction.herokuapp.com/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
+            	<%} %>
+              </div>
+
+
+
+
+              <table class="table">
+                <tbody>
+                  <tr><td>45</td><td>2.45%</td><td>Direct</td></tr>
+                  <tr><td>289</td><td>56.2%</td><td>Referral</td></tr>
+                  <tr><td>98</td><td>25%</td><td>Type</td></tr>
+                  <tr><td>..</td><td>..</td><td>..</td></tr>
+                  <tr><td>..</td><td>..</td><td>..</td></tr>
+                </tbody>
+              </table>
+
+
+
+              	<div class="panel panel-default">
+
+                </div><!--/panel-->
+
+
+
+
+                  <div class="panel-heading">
+
+                      <h4>Engagement</h4>
+
+                 </div><!--/panel-->
+
+
+			    </div><!--/col-span-6-->
+        </div><!--/row-->
       </div>
-    
+  	</div><!--/col-span-9-->
   </div>
 </div>

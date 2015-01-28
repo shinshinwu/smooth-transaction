@@ -1,9 +1,6 @@
 body {
  font: 15px "Avenir";
- /*background-color: #F6F6F6;*/
-     background:none transparent;
-
-
+  background:none transparent;
 }
 
 input[type="text"],[type="number"],[type="submit"],[type="password"], button {
