@@ -2,41 +2,35 @@
 
   <p>Organization Info</p>
 
-  <%- partial('partials/_input', {name: 'orgName', placeholder: 'Organization name: '}) %>
-  <%- partial('partials/_input', {name: 'EIN', placeholder: 'EIN: '}) %>
-  <%- partial('partials/_input', {name: 'website', placeholder: 'Website: '}) %>
+  <%- partial('partials/_input', {name: 'orgName', placeholder: 'Organization name'}) %>
+  <%- partial('partials/_input', {name: 'EIN', placeholder: 'EIN'}) %>
+  <%- partial('partials/_input', {name: 'website', placeholder: 'Website'}) %>
 
   <div class="input-row">
     <input type="text" name="address.street" placeholder="Street address">
     <input type="text" name="address.zip" placeholder="Zipcode">
   </div>
 
-  <%- partial('partials/_input', {name: 'phone', placeholder: 'Phone number: '}) %>
+  <%- partial('partials/_input', {name: 'phone', placeholder: 'Phone number'}) %>
 
   <p>Representaive Info</p>
 
   <div class="input-row">
-    <label><span>Full name: </span>
-      <input type="text" name="representative.firstName" placeholder="First name">
-      <input type="text" name="representative.lastName" placeholder="Last name">
-    </label>
+    <input type="text" name="representative.firstName" placeholder="First name">
+    <input type="text" name="representative.lastName" placeholder="Last name">
   </div>
 
   <div class="input-row">
-    <label><span>Date of birth: </span>
-      <input type="text" name="representative.DOB.month" placeholder="Month">
-      <input type="text" name="representative.DOB.day" placeholder="Day">
-      <input type="text" name="representative.DOB.year" placeholder="Year">
-    </label>
+    <input type="text" name="representative.DOB.month" placeholder="Month">
+    <input type="text" name="representative.DOB.day" placeholder="Day">
+    <input type="text" name="representative.DOB.year" placeholder="Year">
   </div>
 
-  <%- partial('partials/_input', {name: 'representative.SSN', placeholder: 'SSN (last four digits): '}) %>
+  <%- partial('partials/_input', {name: 'representative.SSN', placeholder: 'SSN (last four digits)'}) %>
 
   <p>Login Info</p>
 
-  <div class="input-row">
-    <input type="text" placeholder="Enter your email" name="email">
-  </div>
+  <%- partial('partials/_input', {name: 'email', placeholder: 'Enter your email'}) %>
 
   <div class="input-row">
     <input type="password" placeholder="Enter your password" name="password">
