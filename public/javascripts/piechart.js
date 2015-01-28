@@ -2,7 +2,7 @@ var width = 300;
 var height = 300;
 var data = [ 9, 12, 28, 48, 3 ];
 
-var outerRadius = height / 2 - 20,
+var outerRadius = height / 2 - 5,
     innerRadius = outerRadius / 3,
     cornerRadius = 10;
 
