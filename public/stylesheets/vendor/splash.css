@@ -28,7 +28,6 @@
 
 body, html
 {
-  background: #E2E4E7;
   padding: 0;
   position: relative;
   height: 100%;
@@ -37,7 +36,6 @@ body, html
   -moz-transition: opacity 400ms;
   transition: opacity 400ms;
 }
-
 
 /* Selected text Color */
 
@@ -170,7 +168,7 @@ p a:hover
 
 .button-white
 {
-
+  font-family: Avenir;
   color: #333;
   padding: 10px 20px;
   letter-spacing: 2px;
@@ -419,7 +417,7 @@ nav
 
 .page1
 {
-  background: url('../../assets/images/vendor/bg.jpg')#131313;
+  background: url('../../assets/images/dark.jpg')#131313;
   background-size: cover;
   height: 100%;
   position: relative;
@@ -429,11 +427,6 @@ nav
 {
   color: #FFF;
 }
-
-
-/* Don't display the logo for Phone */
-
-.logo-phone {display: none;}
 
 /* Huge Title */
 
@@ -659,77 +652,8 @@ pre {
 
 
 /* 12 MODAL SETTINGS ================================================= */
-/*
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  padding: 1em;
-  text-align: center;
-  background-color: rgba(24,27,30,0.7);
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s linear 250ms, opacity 250ms ease-in-out;
-  z-index: 999;
-  cursor: pointer;
-}
-.modal::before {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-.modal.is-visible {
-  transition-delay: 0s;
-}
-.modal-content {
-  display: inline-block;
-  width: auto;
-  text-align: left;
-  box-shadow: 0 0 0.0em rgba(0, 0, 0, 0.25);
-  vertical-align: middle;
-  cursor: auto;
-  transition: transform 250ms ease-in-out;
-  -webkit-backface-visibility: hidden;
-}
-.modal-close {
-  height: 2em;
-  width: 2em;
-  text-align: center;
-}
-.modal-anim--one {
-  transform: translateY(3em) scale(0.95);
-}
-.is-visible .modal-anim--one {
-  transform: translateY(0) scale(1);
-}
-.modal-anim--two {
-  transform: translateX(-35em) rotate(23deg);
-}
-.is-visible .modal-anim--two {
-  transform: translateX(0) rotate(0);
-}
-.modal-anim--three {
-  transform: scale(1.5);
-}
-.is-visible .modal-anim--three {
-  transform: scale(1);
-}
-.is-visible {
-  visibility: visible;
-  opacity: 1;
-}*/
-
-
 
 /* 13. MEDIA QUERIES  ============================================ */
-
-
 
 
 @media screen and (max-width: 768px) {
@@ -752,12 +676,6 @@ pre {
 h2 {font-size: 42px;}
 
 h3 {font-size:32px;}
-
-.logo-phone {display: block; width: 50%; margin: auto;}
-
-#logo {display: none;}
-
-.cbp-af-header{display: none;}
 
 h1 {font-size:30px;}
 
