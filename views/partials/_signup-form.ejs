@@ -19,7 +19,7 @@
 
   <div class="input-row">
     <input type="text" placeholder="First name" name="representative.firstName">
-    <label><span class="dob-label">Date of Birth: </span>
+    <label><span class="input-label">Date of Birth: </span>
       <input class="birthday" type="text" name="representative.DOB.month" placeholder="Month">
       <input class="birthday" type="text" name="representative.DOB.day" placeholder="Day">
       <input class="birthday" type="text" name="representative.DOB.year" placeholder="Year">
@@ -27,7 +27,7 @@
   </div>
 
   <div class="input-row">
-    <input type="text" placeholder="Last name" name="respresentative.lastName">
+    <input type="text" placeholder="Last name" name="representative.lastName">
     <input type="text" placeholder="SSN (last four digits)" name="representative.SSN">
   </div>
 
@@ -36,11 +36,11 @@
   <%- partial('partials/_input', {name: 'email', placeholder: 'Enter your email'}) %>
 
   <div class="input-row">
-    <input type="password" placeholder="Enter your password" name="password">
+    <input type="password" name="password"><span class="input-label"> (Enter a password)</span>
   </div>
 
   <div class="input-row">
-    <input type="password" placeholder="Verify your password" name="passwordVerify">
+    <input type="password" name="passwordVerify"><span class="input-label"> (Verify your password)</span>
   </div>
 
   <div class="input-row">
