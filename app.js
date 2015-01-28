@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
-var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
 var database = require('./config/database');
 var dotenv = require('dotenv');
@@ -36,7 +35,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(expressLayouts);
 
 mongoose.connect(database.url)
 
