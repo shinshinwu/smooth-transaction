@@ -210,27 +210,30 @@ router.get('/users/oath/callback', function(req, res){
     }
   }, function(err, r, body){
 
-    if (err)
-      res.redirect('/dashboard')
-
-    var stripeUserId = JSON.parse(body).stripe_user_id;
-    var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
-    var refreshToken = JSON.parse(body).refresh_token;
-    var accessToken = JSON.parse(body).access_token;
-
-    User.findById(userId, function(err, user){
-    if (err){
-      res.redirect('/dashboard')
+    if (err) {
+    res.redirect('/dashboard')
     } else {
-      user.stripe_user_id = stripeUserId
-      user.stripe_publishable_key = stripePublishableKey
-      user.refresh_token = refreshToken
-      user.access_token = accessToken
-      user.save(function(err){
+      console.log("body", body)
+      var stripeUserId = JSON.parse(body).stripe_user_id;
+      var stripePublishableKey = JSON.parse(body).stripe_publishable_key;
+      var refreshToken = JSON.parse(body).refresh_token;
+      var accessToken = JSON.parse(body).access_token;
+
+      User.findById(userId, function(err, user){
+      if (err){
         res.redirect('/dashboard')
+      } else {
+          user.stripe_user_id = stripeUserId
+          user.stripe_publishable_key = stripePublishableKey
+          user.refresh_token = refreshToken
+          user.access_token = accessToken
+          user.save(function(err){
+            res.redirect('/dashboard')
+          });
+        }
       });
     }
-  });
+
   });
 });
 
