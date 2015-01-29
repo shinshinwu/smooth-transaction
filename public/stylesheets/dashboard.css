@@ -142,6 +142,13 @@ td {
   .col-sm-9 {
     width:100%!important;
   }
+  .left-side-btns {
+  height: 36vh!important;
+  }
+
+ .left-side-btns button{
+  height: 9%;
+  }
 }
 
 @media (max-width: 768px){
@@ -422,12 +429,13 @@ circle:hover {
 
 .orgAnalysis #barchart {
   display: block;
-  margin: 0 auto;
-  margin-left: 20%;
+  /*margin: 0 auto;*/
+  margin-left: 10%;
 }
 
 .orgAnalysis #barchart text {
   font-size: 0.4em;
+  text-align: center;
 }
 
 /*shit not aligned, need to fix*/
@@ -494,11 +502,13 @@ circle:hover {
   background-color: #17BECF;
 }
 
-@media (max-width: 1200px){
+@media (max-width: 1600px){
   #barchart {
     margin-left: 0%!important;
   }
-  svg {
-    w:100%;
+
+  .orgAnalysis h3 {
+  font-size: 2em;
   }
 }
+
