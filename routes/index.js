@@ -74,6 +74,8 @@ router.get('/dashboard', function(req, res) {
 
 });
 
+
+
 router.get('/accountinfo', function(req, res) {
   var userId = req.session.user_id;
     if (userId) {
@@ -315,7 +317,12 @@ router.get('/graphs', function(req, res){
       },
         // if successful
         function(user) {
-          res.render('graphs')
+          if (user.stripe_user_id) {
+            res.render('graphs')
+          }
+          else {
+            res.render('nosync')
+          }
       });
     }
     else {
@@ -343,7 +350,8 @@ router.get('/orgdata', function(req, res){
     User.findById(userId, function(err, user){
       if (err){
         res.send(err)
-      } else {
+      }
+      else if (user.stripe_user_id) {
 
         secretKey = user.access_token;
         org.totalEarnings = (user.data.totalEarnings/100);
@@ -378,6 +386,9 @@ router.get('/orgdata', function(req, res){
         });
 
 
+      }
+      else {
+        res.render('nosync')
       }
     });
   }
