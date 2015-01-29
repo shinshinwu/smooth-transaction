@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mandrill = require('node-mandrill')('EQdF2EFMRC04ciDfefm1fw');
 // var jQuery = require('jquery')
 // protected client_id and secret_key for our app from Stripe
 var client_id = process.env.TEST_CLIENT_ID
@@ -36,34 +37,11 @@ router.get('/', function(req, res) {
   }
   else {
     // if not logged in render signin page with any errors
-    res.render('index', {error: err});
+    res.render('index', {error: err, layout: 'splash'});
   }
 });
 
 
-
-// GET signup page
-router.get('/signup', function(req, res) {
-  var userId = req.session.user_id
-  var err = req.param('err')
-
-  if (userId) {
-    // if logged in, render dashboard page
-    getUser(userId,
-      // if error....
-      function(err) {
-        res.redirect('/signup?err=' + err);
-    },
-      // if successful
-      function(user) {
-        res.redirect('/dashboard')
-    });
-  }
-  else {
-    // if not logged in render signup page with any errors
-    res.render('signup', {error: err});
-  }
-});
 
 
 
@@ -248,13 +226,11 @@ router.get('/users/oath/callback', function(req, res){
 // iframe stuff that can be linked on another website
 
 router.get('/iframe', function(req, res) {
-  res.render('iframe')
+  res.render('iframe', {layout: 'splash'})
 });
 
 
 router.post('/iframe', function(req, res) {
-
-  sendEmail(email, (chargeAmount));
 
   var publishableKey = req.body.publishableKey;
   var stripeToken = req.body.stripeToken;
@@ -262,6 +238,7 @@ router.post('/iframe', function(req, res) {
   var name = req.body.name;
   var email = req.body.email;
   var zip = req.body.zip;
+  
 
   User.findOne({ 'stripe_publishable_key': publishableKey }, function (err, user) {
       if (err) return handleError(err);
@@ -277,7 +254,7 @@ router.post('/iframe', function(req, res) {
         metadata: {'email': email, 'zip_code': zip, "name": name}
       }, function(err, charge) {
         if (err && err.type === 'StripeCardError') {
-          res.render('error')
+          res.render('error', {error: err, layout: 'splash'})
         } else {
           // Send receipt for the transaction to their email...
 
@@ -293,13 +270,12 @@ router.post('/iframe', function(req, res) {
                     if (err){
                       res.send(err)
                     } else {
-                      res.render('success_oauth', {user: user})
+                      sendEmail(email, chargeAmount, user.orgName, name);
+                      res.render('congrats', { charge: chargeAmount, layout: 'splash' });
                     };
                   });
                 }
               });
-
-          res.render('congrats', { charge: chargeAmount });
         }
 
       });
@@ -309,48 +285,6 @@ router.post('/iframe', function(req, res) {
 
 // A sample page that uses the iframe tag produced after Oauth
 
-router.get('/sampleorg', function(req, res) {
-  res.render('sampleOrg')
-});
-
-
-// --------- Routes to test D3 charts -----
-
-router.get('/geomap', function(req, res){
-  res.render('geomap')
-});
-
-// --------- Route to test customers card type pie chart -----
-
-router.get('/piechart', function(req, res){
-  res.render('piechart')
-});
-
-// --------- Route to test payment over year force graph -----
-
-router.get('/forcegraph', function(req, res){
-  res.render('forcegraph')
-});
-
-// --------- Route to test scatterplot over one year -----
-
-router.get('/scatterplot', function(req, res){
-  res.render('scatterplot')
-});
-
-router.get('/monthlytotals', function(req, res) {
-  res.render('monthly-totals')
-});
-
-router.get('/email', function(req, res){
-  res.render('email_testing')
-})
-
-// --------------------------------------------------------
-
-router.get('/userdata', function(req, res){
-  res.render('d3_customer_layout', {layout: 'dashboard'})
-});
 
 router.get('/graphs', function(req, res){
   res.render('graphs', {layout: 'dashboard'})
@@ -415,33 +349,24 @@ router.get('/orgdata', function(req, res){
 
 });
 
-function sendEmail(recipient, amount){
+function sendEmail(email, amount, org, recipientName){
   console.log('hitting')
-  request.post({
-    url: 'https://mandrillapp.com/api/1.0/messages/send.json',
-    form: {
-      'key': email_key,
-      'message': {
-        'from_email': 'smoothmailer@smooth.com',
-        'to': [
-            {
-              'email': recipient,
-              'name': 'Testing...',
-              'type': 'to'
-            },
-          ],
-        'autotext': 'true',
-        'subject': 'Receipt from Smooth Transaction',
-        'html': 'Thank you for your contribution of $'+amount+'!'
-      }
+  mandrill('/messages/send', {
+    message: {
+        to: [{email: email, name: 'Jim Rubenstein'}],
+        from_email: 'smooth@smooth.com',
+        subject: "Receipt for your Smooth Transaction",
+        text: "Thank you for donating $"+amount+" to "+org+"! Your donation has been recieved and your cause bolstered. Rejoice! Feel free to drop by and give again any time. We will be around to make your giving as 'smooth' as humanly possible."
     }
-  }, function(err, body){
-    if(err)
-      console.log(err)
+  }, function(error, response)
+  {
+    //uh oh, there was an error
+    if (error) console.log( JSON.stringify(error) );
 
-    console.log(body)
-  })
-}
+    //everything's good, lets see what mandrill said
+    else console.log(response);
+  });
+};
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
