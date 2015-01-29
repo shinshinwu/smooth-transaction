@@ -195,13 +195,11 @@ td {
 .left-side-btns button:hover, .left-side-btns button:active {
   background: #E6E6E6;
   color: black;
-  border-radius: 15px;
 }
 
 .button-active {
-  background: #E6E6E6;
+  background-color: #E6E6E6!important;
   color: black;
-  border-radius: 15px;
 }
 
 .iframe-tag {

@@ -8,6 +8,7 @@
 
     // automatically show account info when page renders
     getPage('#account-info');
+    activateButton('#account-info')
 
   });
 
@@ -15,14 +16,13 @@
     $(nodeID).on('click', function(e) {
       e.preventDefault();
       getPage(nodeID);
+      activateButton(nodeID);
     });
   }
 
-  function myInit() {
-    $('.left-side-btns a button').click(function() {
-        $('.left-side-btns a button').removeClass('active')
-        $(this).addClass('active')
-    })
+  function activateButton(nodeID) {
+      $('.left-side-btns button').removeClass('button-active')
+      $(nodeID).children().first().addClass('button-active');
   }
 
   function getPage(nodeID) {
