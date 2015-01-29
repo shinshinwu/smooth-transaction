@@ -198,6 +198,12 @@ td {
   border-radius: 15px;
 }
 
+.button-active {
+  background: #E6E6E6;
+  color: black;
+  border-radius: 15px;
+}
+
 .iframe-tag {
   background-color: rgba(0,0,0,0.2);
   padding: 1%;
@@ -206,7 +212,7 @@ td {
 xmp {
   padding:1%;
   font-family: Helvetica!important;
-  color: rgb(66,39,58);
+  color: #FF3333;
 }
 
 .text-filler {
