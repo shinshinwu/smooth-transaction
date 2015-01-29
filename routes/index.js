@@ -85,7 +85,7 @@ router.get('/accountinfo', function(req, res) {
       },
         // if successful
         function(user) {
-          res.render('accountinfo', {user: user})
+          res.render('accountInfo', {user: user})
       });
     }
     else {
