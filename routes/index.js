@@ -62,14 +62,32 @@ router.get('/dashboard', function(req, res) {
       },
         // if successful
         function(user) {
-          res.render('accountInfo', { layout: 'dashboard',
-                                      user: user})
+          res.render('dashboard', {user: user})
       });
     }
     else {
       res.redirect('/')
     }
 
+});
+
+router.get('/accountinfo', function(req, res) {
+  var userId = req.session.user_id;
+    if (userId) {
+      // if logged in, render dashboard page
+      getUser(userId,
+        // if error....
+        function(err) {
+          res.redirect('/?err=' + err);
+      },
+        // if successful
+        function(user) {
+          res.render('accountinfo', {user: user})
+      });
+    }
+    else {
+      res.redirect('/')
+    }
 });
 
 
@@ -284,7 +302,22 @@ router.post('/iframe', function(req, res) {
 
 
 router.get('/graphs', function(req, res){
-  res.render('graphs', {layout: 'dashboard'})
+  var userId = req.session.user_id;
+    if (userId) {
+      // if logged in, render dashboard page
+      getUser(userId,
+        // if error....
+        function(err) {
+          res.redirect('/?err=' + err);
+      },
+        // if successful
+        function(user) {
+          res.render('graphs')
+      });
+    }
+    else {
+      res.redirect('/')
+    }
 });
 
 // Need to write logic to update earnings live
@@ -292,53 +325,58 @@ router.get('/orgdata', function(req, res){
 
   var userId = req.session.user_id
 
-  var now = new Date();
-  var startOfDay = (new Date(now.getFullYear(), now.getMonth(), now.getDate()))/1000;
-  var startOfMonth = (new Date(now.getFullYear(), now.getMonth()))/1000;
+  if (userId) {
+    var now = new Date();
+    var startOfDay = (new Date(now.getFullYear(), now.getMonth(), now.getDate()))/1000;
+    var startOfMonth = (new Date(now.getFullYear(), now.getMonth()))/1000;
 
-  var org = {};
-  var secretKey;
+    var org = {};
+    var secretKey;
 
-  User.findById(userId, function(err, user){
-    if (err){
-      res.send(err)
-    } else {
+    User.findById(userId, function(err, user){
+      if (err){
+        res.send(err)
+      } else {
 
-      secretKey = user.access_token;
-      org.totalEarnings = (user.data.totalEarnings/100);
-      org.totalDonations = user.data.totalDonations;
+        secretKey = user.access_token;
+        org.totalEarnings = (user.data.totalEarnings/100);
+        org.totalDonations = user.data.totalDonations;
 
-      var stripe = require("stripe")(secretKey);
+        var stripe = require("stripe")(secretKey);
 
-      // get list of jsons for daily transactions
-      stripe.balance.listTransactions(
-        {
-          created:
-            { gte: startOfDay
-            }
-        }, function(err, transactions) {
-        org.dailyTotal = getTotalAmount(transactions);
-      });
+        // get list of jsons for daily transactions
+        stripe.balance.listTransactions(
+          {
+            created:
+              { gte: startOfDay
+              }
+          }, function(err, transactions) {
+          org.dailyTotal = getTotalAmount(transactions);
+        });
 
-      // get current balance from account
-      stripe.balance.retrieve(function(err, balance) {
-        org.currentBalance = (balance.pending[0].amount/100);
-      });
+        // get current balance from account
+        stripe.balance.retrieve(function(err, balance) {
+          org.currentBalance = (balance.pending[0].amount/100);
+        });
 
-      // get list of jsons for monthly transactions
-      stripe.balance.listTransactions(
-        {
-          created:
-            { gte: startOfMonth
-            }
-        }, function(err, transactions) {
-        org.monthlyTotal = getTotalAmount(transactions);
-        res.render('organizationAnalysis', { org: org, layout: 'dashboard'})
-      });
+        // get list of jsons for monthly transactions
+        stripe.balance.listTransactions(
+          {
+            created:
+              { gte: startOfMonth
+              }
+          }, function(err, transactions) {
+          org.monthlyTotal = getTotalAmount(transactions);
+          res.render('organizationAnalysis', { org: org})
+        });
 
 
-    }
-  });
+      }
+    });
+  }
+  else {
+    req.redirect('/')
+  }
 
 });
 
