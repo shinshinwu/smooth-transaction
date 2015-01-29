@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mandrill = require('node-mandrill')('EQdF2EFMRC04ciDfefm1fw');
-// var jQuery = require('jquery')
 // protected client_id and secret_key for our app from Stripe
 var client_id = process.env.TEST_CLIENT_ID
 var secret_key = process.env.TEST_SECRET_KEY
@@ -133,7 +132,6 @@ router.post('/users/login', function(req, res) {
 // create and login a new user
 router.post('/users', function(req, res) {
   var password = req.param('password');
-  console.log(password)
   var passwordVerify = req.param('passwordVerify');
   var passLengthErr = { "invalid": { message: 'Password must be at least 8 characters' } }
   var passMatchErr = { "invalid": { message: 'Passwords do not match' } }
@@ -147,7 +145,6 @@ router.post('/users', function(req, res) {
   else if (password === passwordVerify) {
     User.create(req.body, function(err, user) {
       if (err) {
-        console.log(err.errors)
         res.json(err)
       }
       else {
@@ -202,7 +199,6 @@ router.get('/users/authorize', function(req, res){
 router.get('/users/oath/callback', function(req, res){
 
   var userId = req.session.user_id
-  console.log(userId)
   var code = req.query.code;
 
   request.post({
@@ -258,13 +254,12 @@ router.post('/iframe', function(req, res) {
   var name = req.body.name;
   var email = req.body.email;
   var zip = req.body.zip;
-  
+
 
   User.findOne({ 'stripe_publishable_key': publishableKey }, function (err, user) {
       if (err) return handleError(err);
 
       var stripe = require("stripe")(user.access_token);
-      // console.log(user.id)
 
       // post the charges to Stripe
       var charge = stripe.charges.create({
@@ -330,10 +325,6 @@ router.get('/graphs', function(req, res){
     }
 });
 
-router.get('/burritoscape', function(req, res){
-  res.render('burritoscape')
-})
-
 // Need to write logic to update earnings live
 router.get('/orgdata', function(req, res){
 
@@ -398,6 +389,8 @@ router.get('/orgdata', function(req, res){
 
 });
 
+// send receipt to user after successful donation transaction
+
 function sendEmail(email, amount, org, recipientName){
   mandrill('/messages/send', {
     message: {
@@ -415,6 +408,7 @@ function sendEmail(email, amount, org, recipientName){
     else console.log(response);
   });
 };
+
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
