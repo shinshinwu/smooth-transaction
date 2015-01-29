@@ -4,7 +4,8 @@
         <strong>
           <div class="org-name">
             <h1>
-              <%= user.orgName %>
+              <!-- <%= user.orgName %> -->
+              Burrito Foundation, INC.
             </h1>
         </div>
         </strong>
@@ -16,16 +17,16 @@
                 <h4>Organization Information:</h4>
               </div>
                     <div class="org-info">
-                      <p>Email: <%= user.email %></p>
-                      <p>EIN: <%= user.EIN %></p>
-                      <p>Address: <%= user.address.street + ' '+ user.address.zip %></p>
-                      <p>Website: <%= user.website %></p>
+                      <p>Email: <%= user.email %></p><hr>
+                      <p>EIN: <%= user.EIN %></p><hr>
+                      <p>Address: <%= user.address.street + ' '+ user.address.zip %></p><hr>
+                      <p>Website: <%= user.website %></p><hr>
                       <p>Representative:
                         <ul>
                           <li>Name: <%= user.representative.firstName + ' ' + user.representative.lastName %></li>
-                          <li>Date of Birthday: <%= user.representative.DOB.day + " " + user.representative.DOB.month + " " + user.representative.DOB.year %></li>
+                          <li>Date of Birthday: <%= user.representative.DOB.month + " " + user.representative.DOB.day + " " + user.representative.DOB.year %></li>
                         </ul>
-                      </p>
+                      </p><hr>
                       <p>Phone Number: <%= user.phone %></p>
 
                     </div>
@@ -45,7 +46,7 @@
               <div class="panel-heading">
                 <!-- logic to display either a link to sync your stripe id or iframe tag depending if user has synced account-->
                 <% if (user.stripe_user_id === '') { %>
-                <a href="/users/authorize"><button class="connect-stripe">Click here to connect your strip account</button></a>
+                <a href="/users/authorize"><button class="connect-stripe">Click here to connect your Stripe account</button></a>
               <% } else { %>
                 <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
                 <hr>
