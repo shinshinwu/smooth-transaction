@@ -32,7 +32,11 @@
 
 html {
 width: 100%;
-background-size: cover;
+ background: no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 background-image: url(../../assets/images/dark2.jpg);
 }
 
@@ -130,9 +134,13 @@ td {
  background-color: rgba(0,0,0,0.2);
 }
 
-@media (max-width: 1488px){
+@media (max-width: 1030px){
   .col-sm-3 {
     width: 100%;
+  }
+
+  .col-sm-9 {
+    width:100%!important;
   }
 }
 
@@ -163,7 +171,6 @@ td {
 
 .col-sm-9 {
   font-size: 1.5em;
-
 }
 
 .col-sm-3 {
@@ -400,9 +407,9 @@ circle:hover {
 }
 
 .orgAnalysis {
+  background-color: rgba(0,0,0,0);
   width: 90%;
-  height: 800px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   padding: 5%;
   padding-top: 0;
 }
@@ -485,4 +492,13 @@ circle:hover {
 
 .orgAnalysis #avg-donations {
   background-color: #17BECF;
+}
+
+@media (max-width: 1200px){
+  #barchart {
+    margin-left: 0%!important;
+  }
+  svg {
+    w:100%;
+  }
 }
