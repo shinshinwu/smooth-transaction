@@ -11,12 +11,18 @@
 
   });
 
-
   function bindEvents(nodeID) {
     $(nodeID).on('click', function(e) {
       e.preventDefault();
       getPage(nodeID);
     });
+  }
+
+  function myInit() {
+    $('.left-side-btns a button').click(function() {
+        $('.left-side-btns a button').removeClass('active')
+        $(this).addClass('active')
+    })
   }
 
   function getPage(nodeID) {
@@ -28,5 +34,6 @@
       $('#dashboard-display').append(data);
     });
   }
+
 
 })();
