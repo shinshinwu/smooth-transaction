@@ -392,9 +392,9 @@ function sendEmail(email, amount, org, recipientName){
   mandrill('/messages/send', {
     message: {
         to: [{email: email, name: 'Jim Rubenstein'}],
-        from_email: 'smooth@smooth.com',
-        subject: "Receipt for your Smooth Transaction",
-        text: "Thank you for donating $"+amount+" to "+org+"! Your donation has been recieved and \r\n your cause bolstered. Rejoice! Feel free to drop by and give again any time. We will be around to make your giving as 'smooth' as humanly possible."
+        from_email: 'smoothtransaction@smooth-transaction.herokuapp.com',
+        subject: "Receipt for your Donation to"+org+"",
+        text: "\r\nDear "+recipientName+",\n\nThank you for donating $"+amount+" to "+org+"! Your donation has been recieved and your cause bolstered. \nRejoice! Feel free to drop by and give again any time. We will be around to make your giving as 'smooth' as humanly possible.\n\nBest, \n"+org+""
     }
   }, function(error, response)
   {
