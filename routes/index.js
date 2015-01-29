@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var mandrill = require('node-mandrill')('EQdF2EFMRC04ciDfefm1fw');
+// var jQuery = require('jquery')
 // protected client_id and secret_key for our app from Stripe
 var client_id = process.env.TEST_CLIENT_ID
 var secret_key = process.env.TEST_SECRET_KEY
@@ -8,6 +10,7 @@ var email_key = process.env.EMAIL_KEY
 var User = require('../app/models/user')
 var AUTHORIZE_URI = 'https://connect.stripe.com/oauth/authorize';
 var TOKEN_URI = 'https://connect.stripe.com/oauth/token'
+
 // using node package qs for querystring parsing and stringifying
 var qs = require('qs');
 // using request for HTTP client, similar to HTTParty
@@ -255,12 +258,13 @@ router.post('/iframe', function(req, res) {
   var name = req.body.name;
   var email = req.body.email;
   var zip = req.body.zip;
+  
 
   User.findOne({ 'stripe_publishable_key': publishableKey }, function (err, user) {
       if (err) return handleError(err);
 
       var stripe = require("stripe")(user.access_token);
-      console.log(user.id)
+      // console.log(user.id)
 
       // post the charges to Stripe
       var charge = stripe.charges.create({
@@ -273,7 +277,6 @@ router.post('/iframe', function(req, res) {
           res.render('error', {error: err, layout: 'splash'})
         } else {
           // Send receipt for the transaction to their email...
-          sendEmail(email, (chargeAmount*100));
 
           // find the user in our database and update total earning and number of donation attributes
 
@@ -287,12 +290,12 @@ router.post('/iframe', function(req, res) {
                     if (err){
                       res.send(err)
                     } else {
+                      sendEmail(email, chargeAmount, user.orgName, name);
                       res.render('congrats', { charge: chargeAmount, layout: 'splash' });
                     };
                   });
                 }
               });
-
         }
 
       });
@@ -326,6 +329,10 @@ router.get('/graphs', function(req, res){
       res.redirect('/')
     }
 });
+
+router.get('/burritoscape', function(req, res){
+  res.render('burritoscape')
+})
 
 // Need to write logic to update earnings live
 router.get('/orgdata', function(req, res){
@@ -391,30 +398,23 @@ router.get('/orgdata', function(req, res){
 
 });
 
-function sendEmail(recipient, amount, org){
-  $.ajax({
-  type: 'POST',
-  url: 'https://mandrillapp.com/api/1.0/messages/send.json',
-  data: {
-    'key': email_key,
-    'message': {
-      'from_email': 'smoothmailer@smooth.com',
-      'to': [
-          {
-            'email': recipient,
-            'name': 'Testing...',
-            'type': 'to'
-          },
-        ],
-      'autotext': 'true',
-      'subject': 'Receipt from Smooth Transaction',
-      'html': 'Thank you for your contribution of $'+amount+'!'
+function sendEmail(email, amount, org, recipientName){
+  mandrill('/messages/send', {
+    message: {
+        to: [{email: email, name: recipientName}],
+        from_email: 'smoothtransaction@smooth-transaction.herokuapp.com',
+        subject: "Receipt for your Donation to "+org+"",
+        text: "\r\nDear "+recipientName+",\n\nThank you for donating $"+amount+" to "+org+"! Your donation has been recieved and your cause bolstered. \nRejoice! Feel free to drop by and give again any time. We will be around to make your giving as 'smooth' as humanly possible.\n\nBest, \n"+org+""
     }
-  }
-}).done(function(response) {
-    console.log(response);
-});
-}
+  }, function(error, response)
+  {
+    //uh oh, there was an error
+    if (error) console.log( JSON.stringify(error) );
+
+    //everything's good, lets see what mandrill said
+    else console.log(response);
+  });
+};
 
 function getUser(userId, errorCallback, successCallback) {
   User.findOne({'_id': userId}, function(err, user) {
