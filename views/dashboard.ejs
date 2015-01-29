@@ -10,10 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="../stylesheets/vendor/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../stylesheets/dashboard.css">
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"><\/script>')</script>
-		<script type='text/javascript' src="javascripts/vendor/d3.js"></script>
+    <script type='text/javascript' src="javascripts/vendor/d3.js"></script>
+		<script type='text/javascript' src="javascripts/dashboard.js"></script>
 	</head>
 	<body>
-<!-- Header -->	
+<!-- Header -->
 
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
@@ -29,13 +30,13 @@
     <div class="col-sm-3">
       <!-- Left column -->
       <div class="left-side-btns">
-        <a href="/dashboard"><button data-icon="&#xe606;">Account Information</button></a>
-        <a href="/graphs"><button data-icon="&#xe607;">Customer Analysis</button></a>
-        <a href="/orgdata"><button data-icon="&#xe608;">Organization Analysis</button></a>
+        <a id="account-info" href="/accountinfo"><button data-icon="&#xe606;">Account Information</button></a>
+        <a id="graphs" href="/graphs"><button data-icon="&#xe607;">Customer Analysis</button></a>
+        <a id="org-data" href="/orgdata"><button data-icon="&#xe608;">Organization Analysis</button></a>
         <a href="/logout"><button data-icon="&#xe602;">Log Out</button></a>
-      </div>        
+      </div>
     </div><!-- /col-3 -->
-	 <%- body %>
+    <div id="dashboard-display"></div>
   </div>
 </div>
 
