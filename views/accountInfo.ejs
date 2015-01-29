@@ -6,7 +6,7 @@
             <h1>
               <%= user.orgName %>
             </h1>
-        </div>
+          </div>
         </strong>
         <div class="row">
             <!-- center left-->
@@ -47,7 +47,7 @@
                 <% if (user.stripe_user_id === '') { %>
                 <a href="/users/authorize"><button class="connect-stripe">Click here to connect your Stripe account</button></a>
               <% } else { %>
-                <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go.</p>
+                <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go. The widget is exactly 210px(width) by 400px(height), so make sure you save enough space!</p>
                 <hr>
                 <div class="iframe-tag">
                   <xmp><iframe src="https://smooth-transaction.herokuapp.com/iframe" name="<%- user.stripe_publishable_key %>" height="400px" width="210px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
