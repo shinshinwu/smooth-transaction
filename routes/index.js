@@ -388,10 +388,9 @@ router.get('/orgdata', function(req, res){
 });
 
 function sendEmail(email, amount, org, recipientName){
-  console.log('hitting')
   mandrill('/messages/send', {
     message: {
-        to: [{email: email, name: 'Jim Rubenstein'}],
+        to: [{email: email, name: recipientName}],
         from_email: 'smoothtransaction@smooth-transaction.herokuapp.com',
         subject: "Receipt for your Donation to"+org+"",
         text: "\r\nDear "+recipientName+",\n\nThank you for donating $"+amount+" to "+org+"! Your donation has been recieved and your cause bolstered. \nRejoice! Feel free to drop by and give again any time. We will be around to make your giving as 'smooth' as humanly possible.\n\nBest, \n"+org+""
