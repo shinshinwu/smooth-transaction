@@ -32,7 +32,7 @@
 
 html {
 width: 100%;
- background: no-repeat center center fixed; 
+ background: no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -217,6 +217,7 @@ td {
 }
 
 .iframe-tag {
+  color: black;
   background-color: rgba(0,0,0,0.2);
   padding: 1%;
 }

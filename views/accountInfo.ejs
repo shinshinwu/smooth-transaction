@@ -23,7 +23,7 @@
                       <p>Representative:
                         <ul>
                           <li>Name: <%= user.representative.firstName + ' ' + user.representative.lastName %></li>
-                          <li>Date of Birthday: <%= user.representative.DOB.month + " " + user.representative.DOB.day + " " + user.representative.DOB.year %></li>
+                          <li>Date of Birth: <%= user.representative.DOB.month + " " + user.representative.DOB.day + " " + user.representative.DOB.year %></li>
                         </ul>
                       </p><hr>
                       <p>Phone Number: <%= user.phone %></p>
@@ -50,7 +50,9 @@
                 <p>Awesome! Thanks for syncing your account with Stripe. Just copy this code specially made for your organization and paste it somewhere in the body of your website's html tag and you're good to go. The widget is exactly 210px(width) by 400px(height), so make sure you save enough space!</p>
                 <hr>
                 <div class="iframe-tag">
-                  <xmp><iframe src="http://localhost/iframe" name="<%- user.stripe_publishable_key %>" height="450px" width="190px" align="center" frameborder="0" allowTransparency="true"></iframe></xmp>
+                  <textarea name="" id="" cols="65%" rows="4">
+<iframe src="https://smooth-transaction.herokuapp.com" name="<%- user.stripe_publishable_key %>" height="450px" width="190px" align="center" frameborder="0" allowTransparency="true"></iframe>
+                  </textarea>
                 </div>
               <%} %>
               </div>
