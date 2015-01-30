@@ -12,12 +12,12 @@ var randomDay = function(){
 
 dataset = []
 
-for (i = 0; i < 1000; i++) { 
+for (i = 0; i < 1000; i++) {
     var set = [randomDay(), randomAmount()]
     dataset.push(set)
 }
 
-var january = d3.time.scale()    
+var january = d3.time.scale()
 	.domain([new Date(2012, 0, 1), new Date(2012, 0, 31)])
   .range([padding, w - padding * 2]);
 
@@ -42,7 +42,7 @@ var yScale = d3.scale.linear()
 				 .range([h - padding, padding]);
 
 var rScale = d3.scale.linear()
-	.domain([0, d3.max(dataset, function(d){ 
+	.domain([0, d3.max(dataset, function(d){
 		return d[1];
 	})])
 	.range([2,6]);
@@ -75,7 +75,7 @@ svg.append('g')
 	.data(dataset)
 	.enter()
 	.append("circle")
-	.attr('fill', '#274AB3')
+	.attr('fill', '#526EC2')
 	.on('mouseover', function(d){
 
 		function dateFromDay(year, day){
@@ -140,7 +140,7 @@ d3.select("button")
 		var newNumber2 = Math.floor(Math.random() * maxRange);	//New random integer
 		dataset.push([newNumber1, newNumber2]);			//Add new number to array
 	}
-	
+
 	//Update scale domains
 	xScale.domain([0, d3.max(dataset, function(d) { return d[0]; })]);
 	yScale.domain([0, d3.max(dataset, function(d) { return d[1]; })]);
@@ -188,28 +188,7 @@ svg.append("clipPath")                  //Make a new clipPath
     .attr("width", w - padding * 3)
     .attr("height", h - padding * 2);
 
-// Text
 
-// svg.selectAll('text')
-// 	.data(dataset)
-// 	.enter()
-// 	.append('text')
-// 	.attr('x', function(d){
-// 		return xScale(d[0]);
-// 	})
-// 	.attr('y', function(d){
-// 		return yScale(d[1]);
-// 	})
-// 	.attr("font-family", "sans-serif")
-//   .attr("font-size", "11px")
-//   .attr("fill", "red")
-
-// Appending Axes
-
-// svg.append('g')
-// 	.attr('class', 'axis')
-// 	.attr('transform', 'translate(0,'+(h - padding)+")")
-// 	.call(xAxis)
 
 
 
