@@ -4,10 +4,8 @@ var map = new Datamap({
     geographyConfig: {
       highlightBorderColor: '#FFFFFF',
       popupTemplate: function(geo, data) {
-        console.log(geo.properties.name)
-        console.log(data.donations.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
         $('.state').html(geo.properties.name)
-        $('.amount').html(data.donations.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
+        $('.amount').html("$" + data.donations.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'))
       },
       highlightBorderWidth: 3
     },

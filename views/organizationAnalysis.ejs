@@ -6,33 +6,37 @@
 
     <div class="donation-analysis" id="earning-today">
       <div class="iconMoon" data-icon="&#xe600;"></div>
-      <h4>Donation Earning Today</h4>
+      <h4>Donation Earnings Today</h4>
       <h1>$<%- org.dailyTotal %></h1>
     </div>
     <div class="donation-analysis" id="earning-month">
       <div class="iconMoon" data-icon="&#xe609;"></div>
-      <h4>Donation Earning This Month</h4>
+      <h4>Donation Earnings This Month</h4>
       <h1>$<%- org.monthlyTotal %></h1>
     </div>
     <div class="donation-analysis" id="balance">
       <div class="iconMoon" data-icon="&#xe601;"></div>
-      <h4>Current Deposible Balance</h4>
+      <h4>Current Deposible Balance from Stripe</h4>
       <h1>$<%- org.currentBalance %></h1>
     </div>
     <div class="donation-analysis" id="total-earnings">
       <div class="iconMoon" data-icon="&#xe604;"></div>
-      <h4>Total Earnings To Date</h4>
+      <h4>Total Earnings From Smooth Transaction</h4>
       <h1>$<%- org.totalEarnings %></h1>
     </div>
     <div class="donation-analysis" id="total-donations">
       <div class="iconMoon" data-icon="&#xe605;"></div>
-      <h4>Total Number of Donations To Date</h4>
+      <h4>Total Number of Donations From Smooth Transaction</h4>
       <h1><%- org.totalDonations %></h1>
     </div>
     <div class="donation-analysis" id="avg-donations">
       <div class="iconMoon" data-icon="&#xe603;"></div>
-      <h4>Average Donations Per Transaction</h4>
-      <h1>$<%- (org.totalEarnings / org.totalDonations) %></h1>
+      <h4>Average Amount Donated Per Transaction</h4>
+      <% if (org.totalDonations === 0) {%>
+        <h1>$0</h1>
+      <% } else { %>
+        <h1>$<%- (org.totalEarnings / org.totalDonations) %></h1>
+      <% } %>
     </div>
 
     <div id="barchart">
