@@ -222,6 +222,10 @@ td {
   padding: 1%;
 }
 
+#iframe-border {
+  width: 100%;
+}
+
 xmp {
   padding:1%;
   font-family: Helvetica!important;
