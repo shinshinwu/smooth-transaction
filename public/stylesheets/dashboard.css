@@ -147,7 +147,7 @@ td {
   }
 
  .left-side-btns button{
-  height: 9%!important;
+  height: 9%;
   }
 }
 
@@ -220,6 +220,10 @@ td {
   color: black;
   background-color: rgba(0,0,0,0.2);
   padding: 1%;
+}
+
+#iframe-border {
+  width: 100%;
 }
 
 xmp {
