@@ -20,10 +20,56 @@ input[type="text"],[type="number"],[type="submit"],[type="password"], button {
    margin: 0 0 4px 0;
 }
 
+.donate {
+   box-shadow:
+     inset 0 0 8px  rgba(0,0,0,0),
+           0 0 16px rgba(0,0,0,0);
+    cursor: pointer;
+    border: 3px solid rgba(0,0,0,0.8);
+    font-size: 2em;
+
+}
+
+.donate {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.donate:hover, .donate:focus, .donate:active {
+  background-color: rgba(32, 32, 32, 0.75);
+  background-color: black;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .donate-form {
     height: 100%;
     width: 100%;
-
 }
 
 a {

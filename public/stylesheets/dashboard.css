@@ -147,7 +147,7 @@ td {
   }
 
  .left-side-btns button{
-  height: 9%;
+  height: 9%!important;
   }
 }
 
