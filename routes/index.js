@@ -16,7 +16,6 @@ var qs = require('qs');
 var request = require('request');
 
 
-
 // GET homepage
 router.get('/', function(req, res) {
   var err = req.param('err')

@@ -98,8 +98,6 @@ var ssnValidator = [
 ]
 
 
-
-
 // Schema
 var userSchema = new mongoose.Schema({
 
